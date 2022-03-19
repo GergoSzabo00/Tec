@@ -1,0 +1,83 @@
+.contact-item-holder
+{
+    display:inline-table;
+}
+.contact-item
+{
+    display: table;
+    margin-bottom: 10px;
+}
+.contact-item h6
+{
+    display: table-cell;
+    vertical-align: middle;
+}
+.info-circle
+{
+   position: relative;
+   background: #3e464e;
+   width:40px;
+   height:40px;
+   border-radius:50%;
+   margin-right: 10px;
+}
+.info-circle i
+{
+    position: absolute;
+    font-size: 16px;
+    top:50%;
+    left:0;
+    right:0;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+.social-holder
+{
+    display: flex;
+    justify-content: center;
+}
+.social
+{
+    position: relative;
+    width:40px;
+    height:40px;
+    border-radius:50%;
+    font-size:16px;
+    padding:10px;
+    margin: 0 0.5em 0 0.5em;
+}
+.social:hover
+{
+    opacity: 0.8;
+    color: #fff;
+}
+.social i
+{
+    position:absolute;
+    top:50%;
+    left: 0;
+    right: 0;
+    transform: translateY(-50%);
+}
+.social-facebook
+{
+    background: #4267B2;
+    color: #fff;
+}
+.social-instagram
+{
+    background: #d6249f;
+    background: radial-gradient(circle farthest-corner at 35% 90%, #fec564, transparent 50%), radial-gradient(circle farthest-corner at 0 140%, #fec564, transparent 50%), radial-gradient(ellipse farthest-corner at 0 -25%, #5258cf, transparent 50%), radial-gradient(ellipse farthest-corner at 20% -50%, #5258cf, transparent 50%), radial-gradient(ellipse farthest-corner at 100% 0, #893dc2, transparent 50%), radial-gradient(ellipse farthest-corner at 60% -20%, #893dc2, transparent 50%), radial-gradient(ellipse farthest-corner at 100% 100%, #d9317a, transparent), linear-gradient(#6559ca, #bc318f 30%, #e33f5f 50%, #f77638 70%, #fec66d 100%);
+    color: #fff;
+}
+.social-twitter
+{
+    background: #1DA1F2;
+    color: #fff;
+}
+.payment-methods
+{
+    user-select: none;
+    font-size: 40px;
+}
