@@ -1,3 +1,27 @@
+.input-rounded-left
+{
+    border-right: 0px;
+    border-top-left-radius: 1.5rem;
+    border-bottom-left-radius: 1.5rem;
+}
+.input-rounded-right
+{
+    border-left: 0px;
+    border-top-right-radius: 1.5rem;
+    border-bottom-right-radius: 1.5rem;
+}
+.input-icon
+{
+    position: absolute;
+    top:0;
+    left: 1rem;
+    line-height: 3rem;
+    color: #999;
+}
+.has-icon
+{
+    padding-left: 2.5rem;
+}
 .contact-item-holder
 {
     display:inline-table;

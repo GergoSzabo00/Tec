@@ -20,7 +20,7 @@
                 <h3 class="text-dark mb-0"><span class="text-danger">Tech</span>Zone</h3>
             </a>
             <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                <li class="nav-item"><a href="#" class="nav-link px-2">{{ __('Home') }}</a></li>
+                <li class="nav-item"><a href="{{ route('home') }}" class="nav-link px-2">{{ __('Home') }}</a></li>
                 <li class="nav-item"><a href="#" class="nav-link px-2">{{ __('Services') }}</a></li>
                 <li class="nav-item"><a href="#" class="nav-link px-2">{{ __('Contact') }}</a></li>
             </ul>
@@ -43,7 +43,7 @@
             </div>
 
             <div class="ms-2">
-                <a href="#" class="btn btn-dark btn-sm">
+                <a href="{{ route('login') }}" class="btn btn-dark btn-sm">
                     <i class="fa-solid fa-arrow-right-to-bracket"></i> Login
                 </a>
                 <a href="#" class="btn btn-dark btn-sm">

@@ -17,3 +17,5 @@ use App\Http\Controllers\Controller;
 */
 
 Route::get('/', [Controllers\HomeController::class, 'index'])->name('home');
+
+require __DIR__ . '/auth.php';
