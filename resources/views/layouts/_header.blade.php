@@ -46,7 +46,7 @@
                 <a href="{{ route('login') }}" class="btn btn-dark btn-sm">
                     <i class="fa-solid fa-arrow-right-to-bracket"></i> Login
                 </a>
-                <a href="#" class="btn btn-dark btn-sm">
+                <a href="{{ route('register') }}" class="btn btn-dark btn-sm">
                     <i class="fa-solid fa-user-plus"></i> Register
                 </a>
             </div>
