@@ -27,7 +27,7 @@
             <div class="dropdown">
                 <a href="#" class="btn btn-light btn-sm dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false">
                   <i class="fa-solid fa-cart-shopping"></i>
-                {{ _('Cart') }}  
+                {{ __('Cart') }}  
                 </a>
                 <div class="dropdown-menu">
                     <div class="p-5">
@@ -35,22 +35,40 @@
                             <!-- Cart items will be here -->
                         </div>
                         <div class="d-grid p-2 gap-2 text-center">
-                            <a class="btn btn-primary mb-2" href="#">{{ _('Checkout') }}</a>
-                            <a class="text-decoration-none" href="#">{{ _('View Cart') }}</a>
+                            <a class="btn btn-primary mb-2" href="#">{{ __('Checkout') }}</a>
+                            <a class="text-decoration-none" href="#">{{ __('View Cart') }}</a>
                         </div>
                     </div>
                 </div>
             </div>
-
-            <div class="ms-2">
-                <a href="{{ route('login') }}" class="btn btn-dark btn-sm">
-                    <i class="fa-solid fa-arrow-right-to-bracket"></i> Login
-                </a>
-                <a href="{{ route('register') }}" class="btn btn-dark btn-sm">
-                    <i class="fa-solid fa-user-plus"></i> Register
-                </a>
-            </div>
-
+            @auth
+                <div class="ms-2">
+                    <div class="dropdown">
+                        <a href="#" id="userDropdown" class="btn btn-light btn-sm dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false">
+                            {{ Auth::user()->customer_info->firstname }}  
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="userDropdown">
+                            <li><a class="dropdown-item" href="#"><i class="fa fa-user"></i> {{ __('Profile') }}</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li>
+                                <form method="POST" action="{{ route('logout') }}">
+                                    @csrf
+                                    <button class="dropdown-item" type="submit"><i class="fa fa-sign-out"></i> {{ __('Logout') }}</button>
+                                </form>   
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            @else
+                <div class="ms-2">
+                    <a href="{{ route('login') }}" class="btn btn-dark btn-sm">
+                        <i class="fa-solid fa-arrow-right-to-bracket"></i> Login
+                    </a>
+                    <a href="{{ route('register') }}" class="btn btn-dark btn-sm">
+                        <i class="fa-solid fa-user-plus"></i> Register
+                    </a>
+                </div>
+            @endauth
         </div>
     </div>
 </header>
