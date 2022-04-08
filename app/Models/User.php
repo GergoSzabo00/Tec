@@ -49,7 +49,7 @@ class User extends Authenticatable
 
     public function customer_addresses()
     {
-        return $this->belongsToMany(Address::class);
+        return $this->belongsToMany(Address::class, 'customer_addresses', 'customer_id', 'address_id')->withTimestamps();
     }
 
 }

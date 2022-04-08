@@ -9,8 +9,10 @@ class CustomerInfo extends Model
 {
     use HasFactory;
 
+    protected $table = 'customer_info';
+
     protected $fillable = [
-        'firstname', 'lastname', 'phone',
+        'user_id', 'firstname', 'lastname', 'phone',
     ];
 
     public function user()

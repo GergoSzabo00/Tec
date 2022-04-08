@@ -15,7 +15,7 @@ class Address extends Model
 
     public function customers()
     {
-        return $this->belongsToMany(User::class);
+        return $this->belongsToMany(User::class, 'customer_addresses', 'address_id', 'customer_id')->withTimestamps();
     }
 
 }
