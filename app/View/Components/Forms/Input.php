@@ -10,6 +10,7 @@ class Input extends Component
     public $id;
     public $name;
     public $value;
+    public $class;
     public $icon;
     public $placeholder;
     /**
@@ -17,11 +18,12 @@ class Input extends Component
      *
      * @return void
      */
-    public function __construct($id, $name, $type = 'text', $icon = null, $placeholder = null, $value = '')
+    public function __construct($id, $name, $type = 'text', $class = null, $icon = null, $placeholder = null, $value = '')
     {
         $this->id = $id;
         $this->name = $name;
         $this->type = $type;
+        $this->class = $class;
         $this->icon = $icon;
         $this->placeholder = $placeholder;
         $this->value = $value;

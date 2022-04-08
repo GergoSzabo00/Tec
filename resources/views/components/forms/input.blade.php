@@ -1,4 +1,4 @@
-<div class="{{ $icon ? 'position-relative ' : '' }}mb-3">
+<div class="position-relative{{ $class ? ' '.$class : ''}}">
     @if ($icon)    
         <i class="input-icon fa fa-{{ $icon }}"></i>
     @endif
