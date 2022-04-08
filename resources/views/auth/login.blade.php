@@ -16,9 +16,11 @@
                             {{ $errors->first('login.invalid') }}
                         </div>
                     @endif
-                    <x-forms.input id="email" name="email" type="email" icon="envelope" placeholder="{{ __('Email') }}" />
-                    <x-forms.input id="password" name="password" type="password" icon="lock" placeholder="{{ __('Password') }}" />
-                    <div class="d-grid mb-3">
+                    <div class="row g-3">
+                        <x-forms.input id="email" name="email" type="email" icon="envelope" placeholder="{{ __('Email') }}" />
+                        <x-forms.input id="password" name="password" type="password" icon="lock" placeholder="{{ __('Password') }}" />
+                    </div>
+                    <div class="d-grid my-3">
                         <button type="submit" class="btn btn-primary btn-lg rounded-pill">{{ __('Login') }}</button>
                     </div>
                     <a href="#" class="text-decoration-none">{{ _('Forgot password') }}</a>
