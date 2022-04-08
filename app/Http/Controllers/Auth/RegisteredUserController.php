@@ -3,13 +3,17 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rules;
+use App\Models\User;
+use App\Models\Country;
+use App\Models\CustomerInfo;
+use App\Models\Address;
 
 class RegisteredUserController extends Controller
 {
@@ -20,7 +24,8 @@ class RegisteredUserController extends Controller
      */
     public function create()
     {
-        return view('auth.register');
+        $countries = Country::all();
+        return view('auth.register')->with(compact('countries'));
     }
 
     /**
@@ -34,22 +39,52 @@ class RegisteredUserController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => ['required', 'string', 'max:255'],
+            'firstname' => ['required', 'alpha', 'max:255'],
+            'lastname' => ['required', 'alpha', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'password_confirmation' => ['required'],
+            'country' => ['required', 'exists:countries,id'],
+            'city' => ['required', 'alpha'],
+            'state' => ['required', 'alpha'],
+            'zip_code' => ['required', 'integer', 'min:0', 'digits_between:3,10'],
+            'address' => ['required', 'string'],
+            'phone' => ['required', 'max:15'],
             'terms' => ['required'],
         ]);
 
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-        ]);
+        DB::transaction(function () use ($request) 
+        {
+            $user = User::create([
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+            ]);
 
-        event(new Registered($user));
+            $country_name = Country::find($request->country)->name;
 
-        Auth::login($user);
+            $address = Address::create([
+                'country' => $country_name,
+                'state' => $request->state,
+                'zip_code' => $request->zip_code,
+                'city' => $request->city,
+                'address' => $request->address,
+            ]);
 
-        return redirect(RouteServiceProvider::HOME);
+            $address->save();
+            $user->save();
+
+            $user->customer_addresses()->attach($address);
+
+            $customer_info = CustomerInfo::create([
+                'user_id' => $user->id,
+                'firstname' => $request->firstname,
+                'lastname' => $request->lastname,
+                'phone' => $request->phone,
+            ]);
+
+            event(new Registered($user));
+
+            return redirect(RouteServiceProvider::HOME);
+        });
     }
 }
