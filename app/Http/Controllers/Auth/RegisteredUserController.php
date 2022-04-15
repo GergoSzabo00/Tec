@@ -81,10 +81,11 @@ class RegisteredUserController extends Controller
                 'lastname' => $request->lastname,
                 'phone' => $request->phone,
             ]);
-
-            event(new Registered($user));
-
-            return redirect(RouteServiceProvider::HOME);
         });
+
+        event(new Registered($user));
+
+        return redirect(RouteServiceProvider::HOME);
+
     }
 }
