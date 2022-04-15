@@ -1,6 +1,12 @@
-<div class="position-relative{{ $class ? ' '.$class : ''}}">
-    @if ($icon)    
-        <i class="input-icon fa fa-{{ $icon }}"></i>
+<div class="{{ $class ? ' '.$class : ''}}">
+    @if ($label)
+        <label class="ms-2" for="{{ $name }}">
+            {{ $label }}
+        </label>
+    @endif
+    @if ($icon)
+        <div class="position-relative">    
+            <i class="input-icon fa fa-{{ $icon }}"></i>
     @endif
     <input 
         type="{{ $type }}"
@@ -8,8 +14,12 @@
         id="{{ $id }}"
         name="{{ $name }}"
         placeholder="{{ $placeholder }}"
-        value="{{ old($name, $value) }}">
+        value="{{ old($name, $value) }}"
+        {{ $attributes }}>
     @if ($errors->has($name))
         <div class="text-start invalid-feedback">{{ $errors->first($name) }}</div>
+    @endif
+    @if ($icon)
+        </div>
     @endif
 </div>
