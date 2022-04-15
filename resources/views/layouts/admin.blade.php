@@ -21,6 +21,7 @@
         <!-- CUSTOM STYLES -->
         <link href="{{ url('/css/main.css') }}" rel="stylesheet">
         <link href="{{ url('/css/flag-icons.css') }}" rel="stylesheet">
+        <link href="{{ url('/css/admin.css')}}" rel="stylesheet">
         @stack('styles')
 
         <!-- ICONS -->
@@ -33,16 +34,21 @@
 
     </head>
     <body class="bg-light">
-        @include('layouts._adminheader')
-
-        <main class="container min-vh-100">
-            @yield('content')
-        </main>
+        <div class="d-flex">
+            @include('layouts._adminsidebar')
+            <div class="d-flex flex-column flex-grow-1 overflow-hidden">
+                @include('layouts._adminheader')
+                <main class="container">
+                    @yield('content')
+                </main>
+            </div>
+        </div>
         @include('layouts._footer')
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.14.0-beta2/js/bootstrap-select.min.js" integrity="sha512-FHZVRMUW9FsXobt+ONiix6Z0tIkxvQfxtCSirkKc5Sb4TKHmqq1dZa8DphF0XqKb3ldLu/wgMa8mT6uXiLlRlw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script src="{{ url('/js/sidebar.js') }}"></script>
         @stack('scripts')
     </body>
 </html>
