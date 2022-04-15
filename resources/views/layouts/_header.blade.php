@@ -21,6 +21,11 @@
             </a>
             <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
                 <li class="nav-item"><a href="{{ route('home') }}" class="nav-link px-2">{{ __('Home') }}</a></li>
+                @auth
+                    @if(Auth::user()->is_admin == 1)
+                        <li class="nav-item"><a href="{{ route('admin') }}" class="nav-link px-2">{{ __('Administration') }}</a></li>
+                    @endif
+                @endauth
                 <li class="nav-item"><a href="#" class="nav-link px-2">{{ __('Services') }}</a></li>
                 <li class="nav-item"><a href="#" class="nav-link px-2">{{ __('Contact') }}</a></li>
             </ul>
@@ -45,7 +50,11 @@
                 <div class="ms-2">
                     <div class="dropdown">
                         <a href="#" id="userDropdown" class="btn btn-light btn-sm dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false">
-                            {{ Auth::user()->customer_info->firstname }}  
+                            @if(Auth::user()->is_admin == 1)
+                                admin
+                            @else
+                                {{ Auth::user()->customer_info->firstname }}
+                            @endif  
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="userDropdown">
                             <li><a class="dropdown-item" href="#"><i class="fa fa-user"></i> {{ __('Profile') }}</a></li>
