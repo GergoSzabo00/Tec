@@ -38,7 +38,7 @@
             @include('layouts._adminsidebar')
             <div class="d-flex flex-column flex-grow-1 overflow-hidden">
                 @include('layouts._adminheader')
-                <main class="container">
+                <main class="container py-3">
                     @yield('content')
                 </main>
             </div>
