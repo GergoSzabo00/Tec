@@ -13,5 +13,10 @@ $(document).ready(function() {
       $('.sidebar').removeClass('sidebar-toggle');
 
     });
+
+    $('#checkAll').on('click', function(e)
+    {
+        $('input:checkbox').not(this).prop('checked', this.checked);
+    });
     
 });
