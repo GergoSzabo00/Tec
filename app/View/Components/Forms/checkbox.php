@@ -4,7 +4,7 @@ namespace App\View\Components;
 
 use Illuminate\View\Component;
 
-class checkbox extends Component
+class Checkbox extends Component
 {
     public $id;
     public $name;
