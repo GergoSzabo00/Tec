@@ -25,16 +25,16 @@
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link collapsed" href="#collapseManufacturers" role="button" data-bs-toggle="collapse" data-bs-target="#collapseManufacturers" aria-expanded="false" aria-controls="collapseManufacturers">
+            <a class="nav-link collapsed{{request()->routeIs('manufacturers') || request()->routeIs('manufacturer.create') ? ' active': ''}}" href="#collapseManufacturers" role="button" data-bs-toggle="collapse" data-bs-target="#collapseManufacturers" aria-expanded="false" aria-controls="collapseManufacturers">
                 <i class="fa fa-fw fa-screwdriver-wrench"></i>
                 <span>{{__('Manufacturers')}}</span>
             </a>
             <div class="collapse" id="collapseManufacturers" data-bs-parent="#sidebar">
                 <div class="card bg-black">
-                    <a href="#" class="nav-link">
+                    <a href="{{route('manufacturers')}}" class="nav-link{{request()->routeIs('manufacturers') ? ' active': ''}}">
                         <i class="fa fa-fw fa-list-ul"></i> {{__('All Manufacturers')}}
                     </a>
-                    <a href="#" class="nav-link">
+                    <a href="{{route('manufacturer.create')}}" class="nav-link{{request()->routeIs('manufacturer.create') ? ' active': ''}}">
                         <i class="fa fa-fw fa-circle-plus"></i> {{__('Add Manufacturer')}}
                     </a>
                 </div>
