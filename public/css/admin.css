@@ -85,6 +85,40 @@
     border-color: #0a58ca;
 }
 
+.card-icon-holder
+{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 5rem;
+    height: 5rem;
+}
+.card-icon
+{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    border: .2rem solid white;
+    width: 3.5rem;
+    height: 3.5rem;
+    border-radius: 50%;
+    font-size: 1.5rem;
+}
+
+.card-detail
+{
+    display:flex;
+    flex-direction: column;
+    justify-content:center;
+}
+
+.card-detail .card-title
+{
+    font-weight: 700;
+}
+
 @media (min-width: 768px) 
 {
     .sidebar-toggle
