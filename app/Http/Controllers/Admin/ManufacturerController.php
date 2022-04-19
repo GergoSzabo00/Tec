@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\ManufacturerRequest;
 use App\Models\Manufacturer;
 use Illuminate\Http\Request;
+use Yajra\Datatables\Datatables;
 
 class ManufacturerController extends Controller
 {
@@ -14,11 +15,36 @@ class ManufacturerController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $manufacturers = Manufacturer::paginate(10);
+        if($request->ajax())
+        {
+            return DataTables::of(Manufacturer::query())
+                ->addColumn('checkbox', function ($row)
+                {
+                    return '<input type="checkbox" class="form-check-input" name="ids" value="'.$row->id.'">';
+                })
+                ->addColumn('action', function ($row)
+                {
+                    $btns = '
+                    <div class="d-flex justify-content-center">
+                    <a href="'.route('manufacturer.edit', $row).'" id="editBtn" class="btn action-btn btn-secondary me-2" data-bs-tooltip="tooltip" data-bs-placement="top" title="'.__('Edit').'">
+                    <i class="fa fa-fw fa-pen-to-square"></i>
+                    </a>
+                    <button class="btn action-btn btn-danger deleteBtn" data-bs-id="'.$row->id.'" data-bs-name="'.$row->name.'">
+                    <i class="fa fa-fw fa-xmark"></i>
+                    </button>
+                    </div>';
+                    return $btns;
+                })
+                ->rawColumns(['checkbox', 'action'])
+                ->orderColumn('name', function($query, $order){
+                        $query->orderBy('name', $order);
+                })
+                ->make(true);
+        }
 
-        return view('admin.manufacturers.index')->with(compact('manufacturers'));
+        return view('admin.manufacturers.index');
     }
 
     /**
@@ -89,8 +115,10 @@ class ManufacturerController extends Controller
      * @param  \App\Models\Manufacturer  $manufacturer
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Manufacturer $manufacturer)
+    public function destroy(Request $request)
     {
-        //
+        $ids = $request->ids;
+        Manufacturer::whereIn('id', $ids)->delete();
+        return response()->json(['data'=>'success']);
     }
 }

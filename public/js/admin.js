@@ -14,9 +14,27 @@ $(document).ready(function() {
 
     });
 
+    $(document).on('click', 'input:checkbox', function(e)
+    {
+        var numOfSelected = $('input:checkbox[name=ids]:checked').length;
+        if(numOfSelected > 0)
+        {
+          $('#deleteSelected').removeAttr('disabled');
+          $('#deleteSelected').attr('aria-disabled', false);
+          $('#deleteSelected').removeClass('disabled');
+        }
+        else
+        {
+          $('#deleteSelected').attr('disabled');
+          $('#deleteSelected').attr('aria-disabled', true);
+          $('#deleteSelected').addClass('disabled');
+        }
+    });
+
     $('#checkAll').on('click', function(e)
     {
-        $('input:checkbox').not(this).prop('checked', this.checked);
+        $('input:checkbox[name=ids]').prop('checked', this.checked);
     });
-    
+
+    $('[data-bs-tooltip="tooltip"]').tooltip();
 });

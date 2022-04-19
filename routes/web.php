@@ -27,6 +27,7 @@ Route::middleware('admin')->group(function ()
     Route::post('admin/manufacturers/create', [Controllers\Admin\ManufacturerController::class, 'store']);
     Route::get('admin/manufacturers/{manufacturer}/edit', [Controllers\Admin\ManufacturerController::class, 'edit'])->name('manufacturer.edit');
     Route::post('admin/manufacturers/{manufacturer}/edit', [Controllers\Admin\ManufacturerController::class, 'update']);
+    Route::post('admin/manufacturers/delete', [Controllers\Admin\ManufacturerController::class, 'destroy'])->name('manufacturer.delete');
 
     Route::get('admin/products/create', [Controllers\Admin\ProductController::class, 'create'])->name('product.create');
     Route::post('admin/products/create', [Controllers\Admin\ProductController::class, 'store']);
