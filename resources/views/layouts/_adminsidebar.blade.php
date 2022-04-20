@@ -80,7 +80,7 @@
         </li>
         <hr class="bg-light mx-3 my-1">
         <li class="nav-item">
-            <a class="nav-link" href="#">
+            <a class="nav-link{{request()->routeIs('storesettings.edit') ? ' active': ''}}" href="{{route('storesettings.edit')}}">
                 <i class="fa fa-fw fa-cog"></i>
                 <span>{{__('Store settings')}}</span>
             </a>

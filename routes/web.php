@@ -22,6 +22,7 @@ Route::middleware('admin')->group(function ()
 {
     Route::get('admin', [Controllers\Admin\AdminController::class, 'index'])->name('admin');
 
+    // Manufacturer controllers
     Route::get('admin/manufacturers', [Controllers\Admin\ManufacturerController::class, 'index'])->name('manufacturers');
     Route::get('admin/manufacturers/create', [Controllers\Admin\ManufacturerController::class, 'create'])->name('manufacturer.create');
     Route::post('admin/manufacturers/create', [Controllers\Admin\ManufacturerController::class, 'store']);
@@ -29,6 +30,7 @@ Route::middleware('admin')->group(function ()
     Route::post('admin/manufacturers/{manufacturer}/edit', [Controllers\Admin\ManufacturerController::class, 'update']);
     Route::post('admin/manufacturers/delete', [Controllers\Admin\ManufacturerController::class, 'destroy'])->name('manufacturer.delete');
 
+    // Category controllers
     Route::get('admin/categories', [Controllers\Admin\CategoryController::class, 'index'])->name('categories');
     Route::get('admin/categories/create', [Controllers\Admin\CategoryController::class, 'create'])->name('category.create');
     Route::post('admin/categories/create', [Controllers\Admin\CategoryController::class, 'store']);
@@ -36,9 +38,14 @@ Route::middleware('admin')->group(function ()
     Route::post('admin/categories/{category}/edit', [Controllers\Admin\CategoryController::class, 'update']);
     Route::post('admin/categories/delete', [Controllers\Admin\CategoryController::class, 'destroy'])->name('category.delete');
 
+    // Product controllers
     Route::get('admin/products/create', [Controllers\Admin\ProductController::class, 'create'])->name('product.create');
     Route::post('admin/products/create', [Controllers\Admin\ProductController::class, 'store']);
     Route::get('admin/products/{product}', [Controllers\Admin\ProductController::class, 'show'])->name('product.details');
+
+    // Store settings controllers
+    Route::get('admin/storesettings/edit', [Controllers\Admin\StoreSettingsController::class, 'edit'])->name('storesettings.edit');
+    Route::post('admin/storesettings/edit', [Controllers\Admin\StoreSettingsController::class, 'update']);
 });
 
 require __DIR__ . '/auth.php';
