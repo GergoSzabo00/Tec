@@ -25,7 +25,7 @@
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link collapsed{{request()->routeIs('manufacturers') || request()->routeIs('manufacturer.create') ? ' active': ''}}" href="#collapseManufacturers" role="button" data-bs-toggle="collapse" data-bs-target="#collapseManufacturers" aria-expanded="false" aria-controls="collapseManufacturers">
+            <a class="nav-link collapsed{{request()->routeIs('manufacturers', 'manufacturer.create', 'manufacturer.edit') ? ' active': ''}}" href="#collapseManufacturers" role="button" data-bs-toggle="collapse" data-bs-target="#collapseManufacturers" aria-expanded="false" aria-controls="collapseManufacturers">
                 <i class="fa fa-fw fa-screwdriver-wrench"></i>
                 <span>{{__('Manufacturers')}}</span>
             </a>
@@ -41,7 +41,7 @@
             </div>
         </li>
         <li class="nav-item">
-            <a class="nav-link collapsed{{request()->routeIs('categories') || request()->routeIs('category.create') ? ' active': ''}}" href="#collapseCategories" role="button" data-bs-toggle="collapse" aria-expanded="false" aria-controls="collapseCategories">
+            <a class="nav-link collapsed{{request()->routeIs('categories', 'category.create', 'category.edit') ? ' active': ''}}" href="#collapseCategories" role="button" data-bs-toggle="collapse" aria-expanded="false" aria-controls="collapseCategories">
                 <i class="fa fa-fw fa-tags"></i>
                 <span>{{__('Categories')}}</span>
             </a>
@@ -73,7 +73,7 @@
             </div>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#">
+            <a class="nav-link{{request()->routeIs('users', 'user.edit') ? ' active': ''}}" href="{{route('users')}}">
                 <i class="fa fa-fw fa-users"></i>
                 <span>{{__('Users')}}</span>
             </a>
