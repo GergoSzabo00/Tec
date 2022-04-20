@@ -32,6 +32,6 @@ class Checkbox extends Component
      */
     public function render()
     {
-        return view('components.checkbox');
+        return view('components.forms.checkbox');
     }
 }
