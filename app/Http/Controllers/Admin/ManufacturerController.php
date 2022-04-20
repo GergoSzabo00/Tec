@@ -31,7 +31,7 @@ class ManufacturerController extends Controller
                     <a href="'.route('manufacturer.edit', $row).'" id="editBtn" class="btn action-btn btn-secondary me-2" data-bs-tooltip="tooltip" data-bs-placement="top" title="'.__('Edit').'">
                     <i class="fa fa-fw fa-pen-to-square"></i>
                     </a>
-                    <button class="btn action-btn btn-danger deleteBtn" data-bs-id="'.$row->id.'" data-bs-name="'.$row->name.'">
+                    <button class="btn action-btn btn-danger deleteBtn" data-bs-id="'.$row->id.'" data-bs-tooltip="tooltip" data-bs-placement="top" title="'.__('Delete').'">
                     <i class="fa fa-fw fa-xmark"></i>
                     </button>
                     </div>';
