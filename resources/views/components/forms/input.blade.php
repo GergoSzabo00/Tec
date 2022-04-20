@@ -6,7 +6,7 @@
     @endif
     @if ($icon)
         <div class="position-relative">    
-            <i class="input-icon fa fa-{{ $icon }}"></i>
+            <i class="input-icon fa fa-fw fa-{{ $icon }}"></i>
     @endif
     <input 
         type="{{ $type }}"
