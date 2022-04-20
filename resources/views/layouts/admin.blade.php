@@ -39,6 +39,7 @@
             <div class="d-flex flex-column flex-grow-1 overflow-hidden">
                 @include('layouts._adminheader')
                 <main class="container py-3">
+                    @include('layouts._alerts')
                     @yield('content')
                 </main>
             </div>
