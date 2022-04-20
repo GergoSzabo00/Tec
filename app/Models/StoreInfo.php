@@ -9,6 +9,8 @@ class StoreInfo extends Model
 {
     use HasFactory;
 
+    protected $table = 'store_info';
+
     protected $fillable = [
       'address', 'phone', 'email', 'shipping_cost'  
     ];
