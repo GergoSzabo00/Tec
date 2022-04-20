@@ -53,7 +53,8 @@ body
 .dataTable
 {
     border-collapse: separate;
-    border-spacing: 0 1rem; 
+    border-spacing: 0 1rem;
+    white-space: nowrap; 
 }
 .dataTable thead 
 {
