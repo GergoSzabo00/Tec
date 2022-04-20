@@ -2,6 +2,27 @@ body
 {
     font-family: Nunito;
 }
+::-webkit-scrollbar
+{
+    width: 16px;
+}
+::-webkit-scrollbar-track
+{
+    background: #212529;
+}
+::-webkit-scrollbar-thumb
+{
+    background: #aaa;
+    background-clip: content-box;
+    border: 4px solid transparent;
+    border-radius: 8px;
+}
+::-webkit-scrollbar-thumb:hover
+{
+    background: #999;
+    background-clip: content-box;
+    border: 4px solid transparent;
+}
 .logo
 {
     border: 2px solid #fff;
