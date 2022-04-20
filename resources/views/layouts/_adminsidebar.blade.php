@@ -41,16 +41,16 @@
             </div>
         </li>
         <li class="nav-item">
-            <a class="nav-link collapsed" href="#collapseCategories" role="button" data-bs-toggle="collapse" aria-expanded="false" aria-controls="collapseCategories">
+            <a class="nav-link collapsed{{request()->routeIs('categories') || request()->routeIs('category.create') ? ' active': ''}}" href="#collapseCategories" role="button" data-bs-toggle="collapse" aria-expanded="false" aria-controls="collapseCategories">
                 <i class="fa fa-fw fa-tags"></i>
                 <span>{{__('Categories')}}</span>
             </a>
             <div class="collapse" id="collapseCategories" data-bs-parent="#sidebar">
                 <div class="card bg-black">
-                    <a href="#" class="nav-link">
+                    <a href="{{route('categories')}}" class="nav-link{{request()->routeIs('categories') ? ' active': ''}}">
                         <i class="fa fa-fw fa-list-ul"></i> {{__('All Categories')}}
                     </a>
-                    <a href="#" class="nav-link">
+                    <a href="{{route('category.create')}}" class="nav-link{{request()->routeIs('category.create') ? ' active': ''}}">
                         <i class="fa fa-fw fa-circle-plus"></i> {{__('Add Category')}}
                     </a>
                 </div>
