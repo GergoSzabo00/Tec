@@ -32,9 +32,9 @@ class Product extends Model
     {
         if ($this->has_product_image) 
         {
-            return asset('uploads/product_images/{$this->product_image}');
+            return asset("images/products/{$this->product_image}");
         }
-        //todo return placeholder
+        return asset("images/products/placeholder.png");
     }
 
 }
