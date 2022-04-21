@@ -62,3 +62,27 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+# Important!
+<h2>If you are using XAMPP:</h2>
+<p>In order to make image upload work, you have to navigate to:</p>
+
+```
+.
+├── xampp
+│   ├── php
+│   │   └── php.ini
+│   │
+ ```
+ <p>Or in the XAMPP Control Panel press <kbd>config</kbd> button on Apache and then PHP (php.ini) option</p>
+<h2>Edit <b>php.ini</b> file</h2> 
+<li>Press <kbd>CTRL</kbd> + <kbd>F</kbd></li>
+<li>Search for <b>gd</b></li>
+<li>Delete the <b>;</b> in front of <b>extension=gd</b></li>
+<li>Save changes made to file</li>
+
+<h2>If you have already started Laravel application and Apache serve in XAMPP</h2>
+<li>Stop application</li>
+<li>Stop Apache</li>
+<li>Start Apache</li>
+<li>Write <b>php artisan serve</b> again in console</li>
