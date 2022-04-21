@@ -25,14 +25,14 @@ class Product extends Model
 
     public function getHasProductImageAttribute()
     {
-        return $this->product_image != null;
+        return $this->attributes['product_image'] != null;
     }
 
     public function getProductImageAttribute()
     {
         if ($this->has_product_image) 
         {
-            return asset("images/products/{$this->product_image}");
+            return asset("images/products/{$this->attributes['product_image']}");
         }
         return asset("images/products/placeholder.png");
     }
