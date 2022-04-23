@@ -20,7 +20,7 @@ class Product extends Model
 
     public function categories()
     {
-        return $this->belongsToMany(Category::class);
+        return $this->belongsToMany(Category::class, 'product_categories');
     }
 
     public function getHasProductImageAttribute()
@@ -35,6 +35,18 @@ class Product extends Model
             return asset("images/products/{$this->attributes['product_image']}");
         }
         return asset("images/products/placeholder.png");
+    }
+
+    public function getProductImageFilenameAttribute()
+    {
+        if ($this->has_product_image)
+        {
+            return $this->attributes['product_image'];
+        }
+        else
+        {
+            return null;
+        }
     }
 
 }
