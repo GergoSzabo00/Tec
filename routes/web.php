@@ -39,10 +39,13 @@ Route::middleware('admin')->group(function ()
     Route::post('admin/categories/delete', [Controllers\Admin\CategoryController::class, 'destroy'])->name('category.delete');
 
     // Product controllers
+    Route::get('admin/products', [Controllers\Admin\ProductController::class, 'index'])->name('products');
     Route::get('admin/products/create', [Controllers\Admin\ProductController::class, 'create'])->name('product.create');
     Route::post('admin/products/create', [Controllers\Admin\ProductController::class, 'store']);
     Route::get('admin/products/{product}', [Controllers\Admin\ProductController::class, 'show'])->name('product.details');
-
+    Route::get('admin/products/{product}/edit', [Controllers\Admin\ProductController::class, 'edit'])->name('product.edit');
+    Route::post('admin/products/{product}/edit', [Controllers\Admin\ProductController::class, 'update']);
+    Route::post('admin/products/delete', [Controllers\Admin\ProductController::class, 'destroy'])->name('product.delete');
 
     // Users controllers
     Route::get('admin/users', [Controllers\Admin\UserController::class, 'index'])->name('users');

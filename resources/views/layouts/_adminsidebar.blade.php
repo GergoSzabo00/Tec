@@ -57,13 +57,13 @@
             </div>
         </li>
         <li class="nav-item">
-            <a class="nav-link collapsed{{request()->routeIs('product.create') ? ' active': ''}}" href="#collapseProducts" role="button" data-bs-toggle="collapse" aria-expanded="false" aria-controls="collapseProducts">
+            <a class="nav-link collapsed{{request()->routeIs('products', 'product.create', 'product.edit') ? ' active': ''}}" href="#collapseProducts" role="button" data-bs-toggle="collapse" aria-expanded="false" aria-controls="collapseProducts">
                 <i class="fa fa-fw fa-box"></i>
                 <span>{{__('Products')}}</span>
             </a>
             <div class="collapse" id="collapseProducts" data-bs-parent="#sidebar">
                 <div class="card bg-black">
-                    <a href="#" class="nav-link">
+                    <a href="{{route('products')}}" class="nav-link">
                         <i class="fa fa-fw fa-list-ul"></i> {{__('All Products')}}
                     </a>
                     <a href="{{route('product.create')}}" class="nav-link{{request()->routeIs('product.create') ? ' active': ''}}">

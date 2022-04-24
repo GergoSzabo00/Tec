@@ -164,6 +164,46 @@ body
     content: '\f160';
     margin-left: .3rem;
 }
+.quantity-setter
+{
+    background: #fff;
+    max-width: 10rem;
+    border-radius: 50rem;
+    box-shadow: 0 .125rem .25rem rgba(0,0,0,.075);
+}
+.quantity-setter input[type="number"]::-webkit-outer-spin-button,
+.quantity-setter input[type="number"]::-webkit-inner-spin-button
+{
+    -webkit-appearance: none;
+    border: 0;
+    margin: 0;
+}
+.quantity-setter input[type='number']
+{
+    border: 0;
+    margin: 0;
+    font-size: 1.2rem;
+    text-align: center;
+    -moz-appearance: textfield;
+}
+.quantity-setter input[type='number']:focus
+{
+    outline: none;
+    box-shadow: none;
+}
+.quantity-setter button
+{
+    color: #999;
+    border-radius: 1rem;
+    width: 2.8rem;
+    height: 2.8rem;
+    border: 0;
+}
+.quantity-setter button:focus
+{
+    outline: none;
+    box-shadow: none;
+}
 .input-icon
 {
     position: absolute;
