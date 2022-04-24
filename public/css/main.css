@@ -54,7 +54,6 @@ body
 {
     border-collapse: separate;
     border-spacing: 0 1rem;
-    white-space: nowrap; 
 }
 .dataTable thead 
 {
@@ -62,6 +61,7 @@ body
     font-size: 1.25rem;
     color: #666;
     user-select: none;
+    white-space: nowrap; 
     -moz-user-select: none;
     -webkit-user-select: none;
     -ms-user-select: none;
