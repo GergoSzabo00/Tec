@@ -35,7 +35,7 @@
     <body>
         @include('layouts._header')
 
-        <main class="container min-vh-100">
+        <main class="container py-3 min-vh-100">
             @include('layouts._alerts')
             @yield('content')
         </main>
