@@ -228,40 +228,6 @@ body
     border-radius: 3rem;
     padding: 0.7rem;
 }
-.contact-item-holder
-{
-    display:inline-table;
-}
-.contact-item
-{
-    display: table;
-    margin-bottom: 10px;
-}
-.contact-item h6
-{
-    display: table-cell;
-    vertical-align: middle;
-}
-.info-circle
-{
-   position: relative;
-   background: #3e464e;
-   width:40px;
-   height:40px;
-   border-radius:50%;
-   margin-right: 10px;
-}
-.info-circle i
-{
-    position: absolute;
-    font-size: 16px;
-    top:50%;
-    left:0;
-    right:0;
-    -webkit-transform: translateY(-50%);
-    -ms-transform: translateY(-50%);
-    transform: translateY(-50%);
-}
 .social-holder
 {
     display: flex;
@@ -305,9 +271,4 @@ body
 {
     background: #1DA1F2;
     color: #fff;
-}
-.payment-methods
-{
-    user-select: none;
-    font-size: 40px;
 }
