@@ -13,7 +13,10 @@
                 <h5 class="card-title">{{$product->product_name}}</h5>
                 <div class="d-grid mt-auto">
                     <p class="card-text text-danger fw-bold">${{number_format($product->price, 2)}}</p>
-                    <a href="#" class="btn btn-primary rounded-pill"><i class="fa fa-fw fa-shopping-cart"></i> {{__('Add to cart')}}</a>
+                    <button class="btn btn-primary rounded-pill addToCartBtn" data-bs-id="{{$product->id}}" type="button">
+                        <i class="fa fa-fw fa-shopping-cart"></i>
+                        {{__('Add to cart')}}
+                    </button>
                 </div>
             </div>
         </div>

@@ -30,18 +30,18 @@
                 <li class="nav-item"><a href="#" class="nav-link px-2">{{ __('Contact') }}</a></li>
             </ul>
             <div class="dropdown">
-                <a href="#" class="btn btn-light btn-sm dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false">
-                  <i class="fa-solid fa-cart-shopping"></i>
-                {{ __('Cart') }}  
+                <a href="#" class="btn btn-sm" data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button" aria-expanded="false">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                    {{__('Cart')}}
+                    <span id="cartItemCount" class="badge bg-primary rounded-pill"></span>
                 </a>
                 <div class="dropdown-menu">
-                    <div class="p-5">
-                        <div class="p-5">
-                            <!-- Cart items will be here -->
+                    <div class="p-2">
+                        <div id="cartItems" class="cart-items">
                         </div>
                         <div class="d-grid p-2 gap-2 text-center">
-                            <a class="btn btn-primary mb-2" href="#">{{ __('Checkout') }}</a>
-                            <a class="text-decoration-none" href="#">{{ __('View Cart') }}</a>
+                            <a class="btn btn-primary" href="#">{{ __('Checkout') }}</a>
+                            <a class="text-decoration-none" href="{{ route('cart') }}">{{ __('View Cart') }}</a>
                         </div>
                     </div>
                 </div>

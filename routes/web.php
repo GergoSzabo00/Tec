@@ -18,6 +18,10 @@ use App\Http\Controllers\Controller;
 
 Route::get('/', [Controllers\HomeController::class, 'index'])->name('home');
 
+Route::get('cart', [Controllers\CartController::class, 'index'])->name('cart');
+Route::get('get-cart-info', [Controllers\CartController::class, 'getCartInfo'])->name('get.cart.info');
+Route::post('add-to-cart', [Controllers\CartController::class, 'addToCart'])->name('add.to.cart');
+
 Route::middleware('admin')->group(function () 
 {
     Route::get('admin', [Controllers\Admin\AdminController::class, 'index'])->name('admin');

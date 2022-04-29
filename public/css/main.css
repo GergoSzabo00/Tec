@@ -42,6 +42,13 @@ body
     font-size: 12px;
     line-height: 1.42857;
 }
+.action-btn-sm
+{
+    width: 20px;
+    height: 20px;
+    padding: 3px 0px;
+    font-size: 10px;
+}
 .w-1
 {
     width: 1%;
@@ -271,4 +278,14 @@ body
 {
     background: #1DA1F2;
     color: #fff;
+}
+.cart-items
+{
+    margin: 10px 0;
+}
+.cart-item
+{
+    display: flex;
+    text-align: center;
+    margin: 15px 0;
 }
