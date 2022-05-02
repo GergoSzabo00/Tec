@@ -18,12 +18,17 @@ use App\Http\Controllers\Controller;
 
 Route::get('/', [Controllers\HomeController::class, 'index'])->name('home');
 
+// Cart controllers
 Route::get('cart', [Controllers\CartController::class, 'index'])->name('cart');
 Route::get('get-cart-info', [Controllers\CartController::class, 'getCartInfo'])->name('get.cart.info');
 Route::post('add-to-cart', [Controllers\CartController::class, 'addToCart'])->name('add.to.cart');
 Route::post('update-cart-quantity', [Controllers\CartController::class, 'updateCartQuantity'])->name('update.cart.quantity');
 Route::post('remove-from-cart', [Controllers\CartController::class, 'removeFromCart'])->name('remove.from.cart');
 Route::post('remove-all-from-cart', [Controllers\CartController::class, 'removeAllFromCart'])->name('remove.all.from.cart');
+
+// Checkout controllers
+Route::get('checkout',  [Controllers\CheckoutController::class, 'index'])->name('checkout');
+Route::post('checkout',  [Controllers\CheckoutController::class, 'store']);
 
 Route::middleware('admin')->group(function () 
 {
