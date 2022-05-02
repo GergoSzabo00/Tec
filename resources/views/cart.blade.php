@@ -35,9 +35,10 @@
                 <h5 class="card-title">{{__('Order summary')}}</h5>
                 <p class="card-text">{{__('Subtotal')}}<span class="subtotal text-primary float-end"></span></p>
                 <p class="card-text">{{__('Shipping cost')}}<span class="shippingCost text-primary float-end"></span></p>
+                <hr>
                 <p class="card-text fs-4">{{__('Total')}}<span class="totalPrice text-primary float-end"></span></p>
                 <div class="d-grid gap-2">
-                    <a href="#" class="btn btn-primary checkoutBtn">{{__('Checkout')}}</button>
+                    <a href="{{route('checkout')}}" class="btn btn-primary checkoutBtn">{{__('Checkout')}}</a>
                     <a href="{{route('home')}}" class="btn btn-secondary">{{__('Continue shopping')}}</a>
                 </div>
             </div>

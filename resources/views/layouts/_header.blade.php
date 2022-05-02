@@ -43,10 +43,11 @@
                         <div>
                             <p>{{__('Subtotal')}}<span class="subtotal text-primary float-end"></span></p>
                             <p>{{__('Shipping cost')}}<span class="shippingCost text-primary float-end"></span></p>
+                            <hr>
                             <p class="fs-4">{{__('Total')}}<span class="totalPrice text-primary float-end"></span></p>
                         </div>
                         <div class="d-grid p-2 gap-2 text-center">
-                            <a class="btn btn-primary checkoutBtn" href="#">{{ __('Checkout') }}</a>
+                            <a class="btn btn-primary checkoutBtn" href="{{route('checkout')}}">{{ __('Checkout') }}</a>
                             <a class="text-decoration-none" href="{{ route('cart') }}">{{ __('View Cart') }}</a>
                         </div>
                     </div>
