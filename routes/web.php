@@ -21,6 +21,9 @@ Route::get('/', [Controllers\HomeController::class, 'index'])->name('home');
 Route::get('cart', [Controllers\CartController::class, 'index'])->name('cart');
 Route::get('get-cart-info', [Controllers\CartController::class, 'getCartInfo'])->name('get.cart.info');
 Route::post('add-to-cart', [Controllers\CartController::class, 'addToCart'])->name('add.to.cart');
+Route::post('update-cart-quantity', [Controllers\CartController::class, 'updateCartQuantity'])->name('update.cart.quantity');
+Route::post('remove-from-cart', [Controllers\CartController::class, 'removeFromCart'])->name('remove.from.cart');
+Route::post('remove-all-from-cart', [Controllers\CartController::class, 'removeAllFromCart'])->name('remove.all.from.cart');
 
 Route::middleware('admin')->group(function () 
 {

@@ -279,6 +279,10 @@ body
     background: #1DA1F2;
     color: #fff;
 }
+.cart-dropdown
+{
+    min-width: 18rem;
+}
 .cart-items
 {
     margin: 10px 0;
@@ -287,5 +291,6 @@ body
 {
     display: flex;
     text-align: center;
+    justify-content: center;
     margin: 15px 0;
 }

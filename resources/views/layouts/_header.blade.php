@@ -15,7 +15,7 @@
     </div>
     <div class="container">
         <div class="d-flex navbar flex-wrap align-items-center justify-content-center justify-content-lg-start p-2">
-            <a class="d-flex align-items-center navbar-brand" href="#">
+            <a class="d-flex align-items-center navbar-brand" href="{{route('home')}}">
                 <img src="{{ url('/images/logo.svg') }}" width="40" height="40" alt="Logo" class="me-2">
                 <h3 class="text-dark mb-0"><span class="text-danger">Tech</span>Zone</h3>
             </a>
@@ -33,14 +33,20 @@
                 <a href="#" class="btn btn-sm" data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button" aria-expanded="false">
                     <i class="fa-solid fa-cart-shopping"></i>
                     {{__('Cart')}}
-                    <span id="cartItemCount" class="badge bg-primary rounded-pill"></span>
+                    <span id="cartItemCountText" class="badge bg-primary rounded-pill"></span>
                 </a>
-                <div class="dropdown-menu">
+                <div class="dropdown-menu cart-dropdown">
                     <div class="p-2">
-                        <div id="cartItems" class="cart-items">
+                        <div id="cartItemsDropdown" class="cart-items">
+                        </div>
+                        <hr>
+                        <div>
+                            <p>{{__('Subtotal')}}<span class="subtotal text-primary float-end"></span></p>
+                            <p>{{__('Shipping cost')}}<span class="shippingCost text-primary float-end"></span></p>
+                            <p class="fs-4">{{__('Total')}}<span class="totalPrice text-primary float-end"></span></p>
                         </div>
                         <div class="d-grid p-2 gap-2 text-center">
-                            <a class="btn btn-primary" href="#">{{ __('Checkout') }}</a>
+                            <a class="btn btn-primary checkoutBtn" href="#">{{ __('Checkout') }}</a>
                             <a class="text-decoration-none" href="{{ route('cart') }}">{{ __('View Cart') }}</a>
                         </div>
                     </div>

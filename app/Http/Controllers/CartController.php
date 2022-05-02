@@ -29,21 +29,28 @@ class CartController extends Controller
         $shippingCost = StoreInfo::first()->shipping_cost;
         
         $cartItemCount = 0;
+        $subtotal = 0;
         $totalPrice = 0;
         $cartItems = session()->get('cart', []); 
 
         foreach($cartItems as $item)
         {
             $cartItemCount += $item['quantity'];
-            $totalPrice += $item['price'] * $item['quantity'];
+            $subtotal += $item['price'] * $item['quantity'];
         }
 
-        if(!empty($cart))
+        if(!empty($cartItems))
         {
-            $totalPrice += $shippingCost;
+            $totalPrice = $subtotal + $shippingCost;
         }
         
-        return response()->json(['cartItemCount' => $cartItemCount, 'cartItems' => $cartItems, 'totalPrice' => $totalPrice]);
+        return response()->json([
+            'cartItemCount' => $cartItemCount,
+            'cartItems' => $cartItems,
+            'subtotal' => $subtotal,
+            'shippingCost' => $shippingCost,
+            'totalPrice' => $totalPrice
+        ]);
     }
 
     /**
@@ -54,6 +61,13 @@ class CartController extends Controller
      */
     public function addToCart(Request $request)
     {
+        if(!$request->id)
+        {
+            return;
+        }
+
+        $request->validate(['id' => 'exists:products,id']);
+
         $product = Product::find($request->id);   
 
         if($product == null)
@@ -91,7 +105,18 @@ class CartController extends Controller
      */
     public function updateCartQuantity(Request $request)
     {
+        if(!$request->id || !$request->quantity)
+        {
+            return;
+        }
 
+        $cartItems = session()->get('cart', []);
+
+        $cartItems[$request->id]['quantity'] = $request->quantity;
+
+        session()->put('cart', $cartItems);
+
+        return response()->json(['data'=>'success']);
     }
 
     /**
@@ -102,18 +127,27 @@ class CartController extends Controller
      */
     public function removeFromCart(Request $request)
     {
+        $cartItems = session()->get('cart', []);
 
+        if(isset($cartItems[$request->id])) 
+        {
+            unset($cartItems[$request->id]);
+            session()->put('cart', $cartItems);
+        }
+
+        return response()->json(['data'=>'success']);
     }
 
      /**
      * Removes all the items from the cart.
      *
-     * @param \Illuminate\Http\Request
      * @return \Illuminate\Http\Response
      */
-    public function removeAllFromCart(Request $request)
+    public function removeAllFromCart()
     {
+        session()->forget('cart');
 
+        return response()->json(['data'=>'success']);
     }
 
 }

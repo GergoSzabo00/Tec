@@ -40,24 +40,68 @@
             @yield('content')
         </main>
 
-        <template id="cartEmptyTemplate">
+        <template id="cartEmptyDropdownTemplate">
             <div class="cart-item">
-                <span>{{__('Cart is empty')}}</span>
+                <h5>{{__('Cart is empty')}}</h5>
             </div>
         </template>
-        <template id="cartItemTemplate">
+
+        <template id="cartItemDropdownTemplate">
             <div class="cart-item">
                 <div class="flex-shrink-0">
                     <img width="50" height="50" class="rounded">
                 </div>
-                <div class="flex-grow-1 ms-3">
-                    <span class="cart-item-name"></span>
-                    <span class="cart-item-price"></span>
+                <div class="flex-grow-1 text-start ms-3">
+                    <span class="cart-item-name text-break"></span>
+                    <div class="d-flex">
+                        <span class="cart-item-price text-primary"></span>
+                        <span class="cart-item-quantity text-muted ms-1"></span>
+                    </div>
                 </div>
                 <button class="flex-shrink-0 ms-2 btn btn-danger action-btn action-btn-sm remove-item-from-cart-btn">
                     <i class="fa fa-fw fa-x"></i>
                 </button>
             </div>
+        </template>
+
+        <template id="cartEmptyTableTemplate">
+            <tr class="align-middle">
+                <td colspan="4" class="text-center">
+                    <h5>{{__('Cart is empty')}}</h5>
+                </td>
+            </tr>
+        </template>
+
+        <template id="cartItemTableTemplate">
+            <tr class="align-middle">
+                <td>
+                    <div class="d-flex">
+                        <div>
+                            <img width="100" height="100" class="rounded"/>
+                        </div>
+                        <div class="align-self-center text-break ms-3">
+                            <h5 class="cart-item-name"></h5>
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <div class="input-group quantity-setter">
+                        <button class="btn decrement-quantity update-quantity">
+                            <i class="fa fa-fw fa-minus"></i>
+                        </button>
+                        <input class="form-control cart-item-quantity-input" type="number" value="1" min="1" max="10">
+                        <button class="btn increment-quantity update-quantity">
+                            <i class="fa fa-fw fa-plus"></i>
+                        </button>
+                    </div>
+                </td>
+                <td>
+                    <span class="cart-item-price"></span>
+                </td>
+                <td>
+                    <button class="btn btn-danger action-btn action-btn-sm remove-item-from-cart-btn"><i class="fa fa-x"></i></button>
+                </td>
+            </tr>
         </template>
 
         @include('layouts._footer')
@@ -66,45 +110,92 @@
         <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.14.0-beta2/js/bootstrap-select.min.js" integrity="sha512-FHZVRMUW9FsXobt+ONiix6Z0tIkxvQfxtCSirkKc5Sb4TKHmqq1dZa8DphF0XqKb3ldLu/wgMa8mT6uXiLlRlw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <script>
+
+            var cartItemCount = 0;
+            var itemsInCart = [];
+            var subtotal = 0;
+            var shippingCost = 0;
+            var totalPrice = 0;
+
             $(document).ready(function() 
             {
-
-                function updateCartItemCount(cartItemCount)
+                function updateCartItemCount()
                 {
-                    $('#cartItemCount').text(cartItemCount);
+                    $('#cartItemCountText').text(cartItemCount);
                 }
 
-                function updateCartItemsInDropdown(cartItemCount, itemsInCart, totalPrice)
+                function updatePrices()
                 {
-                    $('#cartItems').html('');
+                    $('.subtotal').text(subtotal);
+                    $('.shippingCost').text(shippingCost);
+                    $('.totalPrice').text(totalPrice);
+                }
 
-                    if(cartItemCount == 0)
+                function updateCheckoutAndRemoveBtnState()
+                {
+                    if(cartItemCount > 0)
                     {
-                        var clone = document.getElementById('cartEmptyTemplate').content.cloneNode(true);
-                        $('#cartItems').html(clone);
+                        $('.checkoutBtn').removeClass('disabled');
+                        $('.removeAllItemsFromCartBtn').removeClass('disabled');
                     }
                     else
                     {
-                        var items = [];
-                        
-                        var cartItem = document.getElementById('cartItemTemplate').content;
+                        $('.checkoutBtn').addClass('disabled');
+                        $('.removeAllItemsFromCartBtn').addClass('disabled');
+                    }
+                    
+                }
 
-                        for (item in itemsInCart) {
-                            var clone = cartItem.cloneNode(true);
+                function generateItemsFromTemplate(template, emptyTemplate, itemHolder)
+                {
+                    $(itemHolder).html('');
+                    if(cartItemCount == 0)
+                    {
+                        var clone = document.getElementById(emptyTemplate).content.cloneNode(true);
+                        $(itemHolder).html(clone);
+                    }
+                    else
+                    {    
+                        var items = [];  
+                        var cartItem = document.getElementById(template).content;
+
+                        for (item in itemsInCart) 
+                        {
+                            clone = cartItem.cloneNode(true);
 
                             var cartImage = clone.querySelector('img');
                             var cartItemName = clone.querySelector('.cart-item-name');
                             var cartItemPrice = clone.querySelector('.cart-item-price');
+                            var cartItemQuantityInput = clone.querySelector('.cart-item-quantity-input');
+                            var cartItemQuantity = clone.querySelector('.cart-item-quantity');
+                            var removeItemFromCartBtn = clone.querySelector('.remove-item-from-cart-btn');
+
+                            if(cartItemQuantityInput != null)
+                            {
+                                cartItemQuantityInput.setAttribute('data-bs-id', item);
+                                cartItemQuantityInput.value = itemsInCart[item].quantity;
+                            }
+
+                            if(cartItemQuantity != null)
+                            {
+                                cartItemQuantity.textContent = itemsInCart[item].quantity + "x";
+                            }
 
                             cartImage.src = itemsInCart[item].product_image;
                             cartItemName.textContent = itemsInCart[item].product_name;
                             cartItemPrice.textContent = "$"+parseFloat(itemsInCart[item].price).toLocaleString(undefined, { minimumFractionDigits: 2 });
+                            removeItemFromCartBtn.setAttribute('data-bs-id', item);
 
                             items.push(clone);
                         };
-                        $('#cartItems').html(items);
+                        $(itemHolder).html(items);
                     }
-                    
+                }
+
+                function updateItems()
+                {
+                    generateItemsFromTemplate('cartItemDropdownTemplate', 'cartEmptyDropdownTemplate', '#cartItemsDropdown');
+                    generateItemsFromTemplate('cartItemTableTemplate', 'cartEmptyTableTemplate', '#cartItemsTableHolder');
                 }
 
                 function getCartInfo()
@@ -114,22 +205,59 @@
                         type: 'GET',
                         success: function(data)
                         {
-                            var cartItemCount = data.cartItemCount;
-                            var itemsInCart = data.cartItems;
-                            var totalPrice = data.totalPrice;
-                            updateCartItemCount(cartItemCount);
-                            updateCartItemsInDropdown(cartItemCount, itemsInCart, totalPrice);
+                            cartItemCount = data.cartItemCount;
+                            itemsInCart = data.cartItems;
+                            subtotal = "$"+parseFloat(data.subtotal).toLocaleString(undefined, { minimumFractionDigits: 2 });
+                            shippingCost = "$"+parseFloat(data.shippingCost).toLocaleString(undefined, { minimumFractionDigits: 2 });
+                            totalPrice = "$"+parseFloat(data.totalPrice).toLocaleString(undefined, { minimumFractionDigits: 2 });
+                            updateCartItemCount();
+                            updatePrices();
+                            updateItems();
+                            updateCheckoutAndRemoveBtnState();
                         }
                     });
                 }
 
                 getCartInfo();
 
+                $(document).on('click', '.increment-quantity', function(e)
+                {
+                    if($(this).prev().val() < 1000)
+                    {
+                        $(this).prev().val(+$(this).prev().val() + 1);
+                    }
+                });
+
+                $(document).on('click', '.decrement-quantity', function(e)
+                {
+                    if($(this).next().val() > 1)
+                    {
+                        $(this).next().val(+$(this).next().val() - 1);
+                    }
+                });
+
+                $(document).on('click', '.update-quantity', function(e)
+                {
+                    var parent = this.parentNode;
+                    var quantityInput = parent.querySelector('.cart-item-quantity-input');
+                    var productId = $(quantityInput).attr('data-bs-id');
+                    var quantity = $(quantityInput).val();
+                    $.ajax({
+                        url: "{{route('update.cart.quantity')}}",
+                        type: 'POST',
+                        dataType: 'json',
+                        data: {'_token': '{{csrf_token()}}', 'id': productId, 'quantity': quantity},
+                        success: function(data)
+                        {
+                            getCartInfo();
+                        }
+                    });
+                });
+
                 $(document).on('click', '.addToCartBtn', function(e)
                 {
                     var productId = $(this).attr('data-bs-id');
-                    console.log(productId);
-                    if(productId)
+                    if(productId != null)
                     {
                         $.ajax({
                             url: "{{route('add.to.cart')}}",
@@ -139,11 +267,54 @@
                             success: function(data)
                             {
                                 getCartInfo();
-                                console.log(data);
                             }
                         });
                     }
                 });
+
+                $(document).on('click', '.remove-item-from-cart-btn', function(e)
+                {
+                    var productId = $(this).attr('data-bs-id');
+                    if(productId != null)
+                    {
+                        $.ajax({
+                            url: "{{route('remove.from.cart')}}",
+                            type: 'POST',
+                            dataType: 'json',
+                            data: {'_token': '{{csrf_token()}}', 'id': productId},
+                            success: function(data)
+                            {
+                                getCartInfo();
+                            }
+                        });
+                    }
+                });
+
+                $('#removeAllItemsFromCartBtn').on('click', function(e)
+                {
+                    if(cartItemCount > 0)
+                    {
+                        removeAllItemsFromCart();
+                    }
+                    else
+                    {
+                        e.preventDefault();
+                    }
+                });
+
+
+                function removeAllItemsFromCart()
+                {
+                    $.ajax({
+                        url: "{{route('remove.all.from.cart')}}",
+                        type: 'POST',
+                        data: {'_token': '{{csrf_token()}}'},
+                        success: function(data)
+                        {
+                            getCartInfo();
+                        }
+                    });
+                }
             });
         </script>
         @stack('scripts')
