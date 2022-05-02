@@ -32,7 +32,7 @@
         <link rel="manifest" href="{{ url('/images/favicons/site.webmanifest') }}">
 
     </head>
-    <body>
+    <body class="bg-light">
         @include('layouts._header')
 
         <main class="container py-3 min-vh-100">
