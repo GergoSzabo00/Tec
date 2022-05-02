@@ -17,7 +17,8 @@ class DatabaseSeeder extends Seeder
         $this->call([
             CountrySeeder::class,
             OrderStatusSeeder::class,
-            StoreInfoSeeder::class
+            StoreInfoSeeder::class,
+            PaymentOptionSeeder::class
         ]);
     }
 }
