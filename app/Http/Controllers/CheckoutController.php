@@ -74,6 +74,8 @@ class CheckoutController extends Controller
 
             $order->save();
 
+            session()->forget('cart');
+
             return redirect('checkout')->with('success', __('Order placed successfully!'));
 
         });
