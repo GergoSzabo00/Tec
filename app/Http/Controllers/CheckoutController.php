@@ -9,6 +9,7 @@ use App\Models\OrderStatus;
 use App\Models\PaymentOption;
 use App\Models\Product;
 use Illuminate\Support\Facades\DB;
+use App\Http\Requests\CheckoutRequest;
 use Illuminate\Http\Request;
 
 class CheckoutController extends Controller
@@ -28,10 +29,10 @@ class CheckoutController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  App\Http\Requests\CheckoutRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CheckoutRequest $request)
     {
         $cartItems = session()->get('cart', []);
 

@@ -43,12 +43,17 @@
                         <div class="col-md-4 col-lg-4">
                             <div class="card form-check my-2">
                                 <label class="card-body">
-                                    <input class="form-check-input" type="radio" name="payment_option" value="{{$paymentOption->id}}">
+                                    <input class="form-check-input {{$errors->has('payment_option') ? 'is-invalid ' : ''}}" type="radio" name="payment_option" value="{{$paymentOption->id}}">
                                     <span class="card-title">{{$paymentOption->name}}</span>
                                 </label>
                             </div>
                         </div>
                         @endforeach
+                        @if($errors->has('payment_option'))
+                        <div class="d-block invalid-feedback">
+                            {{$errors->first('payment_option')}}
+                        </div>
+                        @endif
                     </div>
                 </div>
             </div>
