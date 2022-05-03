@@ -44,7 +44,8 @@ class CheckoutController extends Controller
         return DB::transaction(function () use ($request, $cartItems)
         { 
             $customer_name = $request->firstname.' '.$request->lastname;
-            $shipping_address = $request->country;
+            $country = Country::find($request->country);
+            $shipping_address = $country->name.' '.$request->zip_code.' '.$request->state.' '.$request->city.' '.$request->address;
 
             $order_status = OrderStatus::where('name', 'Processing')->first();
 
@@ -67,11 +68,14 @@ class CheckoutController extends Controller
                 'shipping_address' => $shipping_address,
                 'phone' => $request->phone,
                 'order_status' => $order_status->id,
-                'payment_option' => $payment_option,
+                'payment_option' => $payment_option->id,
                 'total_price' => $totalPrice
             ]);
 
             $order->save();
+
+            return redirect('checkout')->with('success', __('Order placed successfully!'));
+
         });
     }
 }
