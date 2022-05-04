@@ -9,6 +9,7 @@ use App\Models\OrderStatus;
 use App\Models\PaymentOption;
 use App\Models\Product;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\CheckoutRequest;
 use Illuminate\Http\Request;
 
@@ -64,6 +65,7 @@ class CheckoutController extends Controller
             }
 
             $order = Order::create([
+                'user_id' => Auth::user()->id,
                 'customer_name' => $customer_name,
                 'shipping_address' => $shipping_address,
                 'phone' => $request->phone,
@@ -73,6 +75,24 @@ class CheckoutController extends Controller
             ]);
 
             $order->save();
+
+            foreach($cartItems as $key => $cartItem)
+            {
+                $product = Product::find($key);
+
+                if($product != null)
+                {
+                    $price = $product->price * $cartItem['quantity'];
+                    $quantity = $cartItem['quantity'];
+                    $orderDetail = OrderDetail::create([
+                        'order_id' => $order->id,
+                        'product_name' => $product->product_name,
+                        'bought_quantity' => $quantity,
+                        'price' => $price
+                    ]);
+                    $totalPrice += $product->price * $cartItem['quantity'];
+                }
+            }
 
             session()->forget('cart');
 
