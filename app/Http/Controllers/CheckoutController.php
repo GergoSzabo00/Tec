@@ -22,9 +22,16 @@ class CheckoutController extends Controller
      */
     public function index()
     {
+        $customerInfo = null;
+        $customerAddresses = null;
+        if (Auth::user())
+        {
+            $customerInfo = Auth::user()->customer_info;
+            $customerAddresses = Auth::user()->customer_addresses;
+        }
         $countries = Country::all();
         $paymentOptions = PaymentOption::all();
-        return view('checkout')->with(compact('countries','paymentOptions'));
+        return view('checkout')->with(compact('customerInfo', 'customerAddresses', 'countries', 'paymentOptions'));
     }
 
     /**

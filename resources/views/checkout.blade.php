@@ -13,12 +13,62 @@
                 <div class="card-body">
                     <h5 class="card-title fw-bold">{{__('Contact info')}}</h5>
                     <div class="row g-3 mt-2">
-                        <x-forms.input id="firstname" name="firstname" type="text" class="col-lg-6" icon="user" placeholder="{{ __('First name') }}" />
-                        <x-forms.input id="lastname" name="lastname" type="text" class="col-lg-6" icon="user" placeholder="{{ __('Last name') }}" />
-                        <x-forms.input id="email" name="email" type="email" icon="envelope" placeholder="{{ __('Email') }}" />
-                        <x-forms.input id="phone" name="phone" type="text" class="col-lg-6" icon="phone" placeholder="{{ __('Phone') }}" />
+                        <x-forms.input id="firstname" name="firstname" type="text" class="col-lg-6" icon="user" label="{{__('First name') }}" placeholder="{{ __('First name') }}" value="{{$customerInfo->firstname ?? ''}}" />
+                        <x-forms.input id="lastname" name="lastname" type="text" class="col-lg-6" icon="user" label="{{__('Last name') }}" placeholder="{{ __('Last name') }}" value="{{$customerInfo->lastname ?? ''}}" />
+                        <x-forms.input id="email" name="email" type="email" icon="envelope" label="{{__('Email') }}" placeholder="{{ __('Email') }}" value="{{Auth::user()->email ?? ''}}" />
+                        <x-forms.input id="phone" name="phone" type="text" class="col-lg-6" icon="phone" label="{{__('Phone') }}" placeholder="{{ __('Phone') }}" value="{{$customerInfo->phone ?? ''}}" />
                     </div>
                     <h5 class="card-title mt-4 fw-bold">{{__('Shipping address')}}</h5>
+                    @if ($customerAddresses != null)
+                    <div class="row g-3">    
+                        @foreach ($customerAddresses as $customerAddress)
+                        <div class="col-lg-4">   
+                            <div class="card h-100 form-check">
+                                <label class="d-flex card-body">
+                                    <input class="form-check-input flex-shrink-0{{$errors->has('addresses') ? ' is-invalid ' : ''}}" data-bs-toggle="collapse" data-bs-target="#newAddressCollapse.show" aria-expanded="false" aria-controls="newAddressCollapse" type="radio" name="addresses" value="{{$customerAddress->id}}">
+                                    <span class="mx-2 text-break">{{$customerAddress->country.' '.$customerAddress->state.' '.$customerAddress->zip_code.' '.$customerAddress->city.' '.$customerAddress->address}}</span>
+                                    <a class="ms-auto text-decoration-none text-nowrap" href="#">
+                                        <i class="fa fa-fw fa-pen-to-square"></i>
+                                        {{__('Edit')}}
+                                    </a>
+                                </label>
+                            </div>
+                        </div> 
+                        @endforeach
+                        <div class="col-lg-12">
+                            <div class="card h-100 form-check">
+                                <label class="card-body">
+                                    <input class="form-check-input{{$errors->has('addresses') ? ' is-invalid ' : ''}}" data-bs-toggle="collapse" data-bs-target="#newAddressCollapse:not(.show)" aria-expanded="false" aria-controls="newAddressCollapse" type="radio" name="addresses" value="newAddress">
+                                    <span>{{__('Give new address')}}</span>
+                                    <div class="collapse mt-4" id="newAddressCollapse">
+                                        <div class="row">
+                                            <select id="country" name="country" class="{{$errors->has('country') ? 'is-invalid ' : ''}}selectpicker" title="{{ __('Country') }}" data-live-search="true" data-size="5" data-virtual-scroll="true">
+                                                @foreach ($countries as $country)
+                                                    <option {{ old('country') == $country->id ? 'selected' : '' }} data-content="<span class='fi fi-{{ strtolower($country->code) }}'></span> {{$country->name}}" value="{{$country->id}}"></option>
+                                                @endforeach
+                                            </select>
+                                            @if ($errors->has('country'))
+                                            <div class="text-start invalid-feedback">
+                                                {{ $errors->first('country') }}
+                                            </div>
+                                            @endif
+                                        </div>
+                                        <div class="row g-3 mt-1">
+                                            <x-forms.input id="city" name="city" type="text" class="col-lg-4" icon="building" label="{{__('City')}}" placeholder="{{ __('City') }}" />
+                                            <x-forms.input id="state" name="state" type="text" class="col-lg-4" icon="building" label="{{__('State')}}" placeholder="{{ __('State') }}" />
+                                            <x-forms.input id="zip_code" name="zip_code" type="text" class="col-lg-4" icon="at" label="{{_('Zip code')}}" placeholder="{{ __('Zip code') }}" />
+                                            <x-forms.input id="address" name="address" type="text" icon="location-dot" label="{{__('Address')}}" placeholder="{{ __('Address') }}" />
+                                            <div class="ms-2">
+                                                <input type="hidden" name="save_address" value="0">
+                                                <x-forms.checkbox id="save_address" name="save_address" value="1" label="{{__('Save this address')}}" errorMessage="{{$errors->has('save_address') ? $errors->first('save_address') : ''}}" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    @else
                     <div class="row mt-4">
                         <select id="country" name="country" class="{{$errors->has('country') ? 'is-invalid ' : ''}}selectpicker" title="{{ __('Country') }}" data-live-search="true" data-size="5" data-virtual-scroll="true">
                             @foreach ($countries as $country)
@@ -32,18 +82,19 @@
                         @endif
                     </div>
                     <div class="row g-3 mt-1">
-                        <x-forms.input id="city" name="city" type="text" class="col-lg-4" icon="building" placeholder="{{ __('City') }}" />
-                        <x-forms.input id="state" name="state" type="text" class="col-lg-4" icon="building" placeholder="{{ __('State') }}" />
-                        <x-forms.input id="zip_code" name="zip_code" type="text" class="col-lg-4" icon="at" placeholder="{{ __('Zip code') }}" />
-                        <x-forms.input id="address" name="address" type="text" icon="location-dot" placeholder="{{ __('Address') }}" />
+                        <x-forms.input id="city" name="city" type="text" class="col-lg-4" icon="building" label="{{__('City')}}" placeholder="{{ __('City') }}" />
+                        <x-forms.input id="state" name="state" type="text" class="col-lg-4" icon="building" label="{{__('State')}}" placeholder="{{ __('State') }}" />
+                        <x-forms.input id="zip_code" name="zip_code" type="text" class="col-lg-4" icon="at" label="{{_('Zip code')}}" placeholder="{{ __('Zip code') }}" />
+                        <x-forms.input id="address" name="address" type="text" icon="location-dot" label="{{__('Address')}}" placeholder="{{ __('Address') }}" />
                     </div>
+                    @endif
                     <h5 class="card-title mt-4 fw-bold">{{__('Payment method')}}</h5>
-                    <div class="row">
+                    <div class="row g-3">
                         @foreach($paymentOptions as $paymentOption)
                         <div class="col-md-4 col-lg-4">
-                            <div class="card form-check my-2">
+                            <div class="card form-check">
                                 <label class="card-body">
-                                    <input class="form-check-input {{$errors->has('payment_option') ? 'is-invalid ' : ''}}" type="radio" name="payment_option" value="{{$paymentOption->id}}">
+                                    <input class="form-check-input{{$errors->has('payment_option') ? ' is-invalid ' : ''}}" type="radio" name="payment_option" value="{{$paymentOption->id}}">
                                     <span class="card-title">{{$paymentOption->name}}</span>
                                 </label>
                             </div>
