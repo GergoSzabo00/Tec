@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Address;
 use App\Models\Country;
 use App\Models\Order;
 use App\Models\OrderDetail;
@@ -46,15 +47,57 @@ class CheckoutController extends Controller
 
         if (empty($cartItems))
         {
-            return redirect('checkout');
+            return redirect('checkout')->with('error', __('No items in cart!'));
         }
 
         return DB::transaction(function () use ($request, $cartItems)
         { 
-            $customer_name = $request->firstname.' '.$request->lastname;
-            $country = Country::find($request->country);
-            $shipping_address = $country->name.' '.$request->zip_code.' '.$request->state.' '.$request->city.' '.$request->address;
 
+            $customer_name = $request->firstname.' '.$request->lastname;
+
+            $country = Country::find($request->country);
+            
+            $shipping_address = null;
+
+            $user_id = null;
+
+            if(auth()->check())
+            {
+                $user = Auth::user();
+                $user_id = $user->id;
+
+                if($request->addresses == "newAddress")
+                {
+                    $newAddressCountry = Country::find($request->newAddressCountry);
+
+                    if($request->save_address == 1)
+                    {
+                        $address = Address::create([
+                            'country' => $newAddressCountry->name,
+                            'state' => $request->newAddressState,
+                            'zip_code'=> $request->newAddressZip_code,
+                            'city' => $request->newAddressCity,
+                            'address' => $request->newAddressAddress
+                        ]);
+
+                        $user->customer_addresses()->attach($address);
+
+                    }
+                    
+
+                    $shipping_address = $newAddressCountry->name.' '.$request->newAddressZip_code.' '.$request->newAddressState.' '.$request->newAddressCity.' '.$request->newAddressAddress;
+                }
+                else
+                {
+                    $address = Address::find($request->addresses);
+                    $shipping_address = $address->country.' '.$address->zip_code.' '.$address->state.' '.$address->city.' '.$address->address;
+                }
+            }
+            else
+            {
+                $shipping_address = $country->name.' '.$request->zip_code.' '.$request->state.' '.$request->city.' '.$request->address;
+            }
+    
             $order_status = OrderStatus::where('name', 'Processing')->first();
 
             $payment_option = PaymentOption::find($request->payment_option);
@@ -72,7 +115,7 @@ class CheckoutController extends Controller
             }
 
             $order = Order::create([
-                'user_id' => Auth::user()->id,
+                'user_id' => $user_id,
                 'customer_name' => $customer_name,
                 'shipping_address' => $shipping_address,
                 'phone' => $request->phone,

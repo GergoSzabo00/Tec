@@ -25,7 +25,7 @@
                         <div class="col-lg-4">   
                             <div class="card h-100 form-check">
                                 <label class="d-flex card-body">
-                                    <input class="form-check-input flex-shrink-0{{$errors->has('addresses') ? ' is-invalid ' : ''}}" data-bs-toggle="collapse" data-bs-target="#newAddressCollapse.show" aria-expanded="false" aria-controls="newAddressCollapse" type="radio" name="addresses" value="{{$customerAddress->id}}">
+                                    <input class="form-check-input flex-shrink-0{{$errors->has('addresses') ? ' is-invalid' : ''}}" {{old('addresses') == $customerAddress->id ? 'checked' : ''}} data-bs-toggle="collapse" data-bs-target="#newAddressCollapse.show" aria-expanded="false" aria-controls="newAddressCollapse" type="radio" name="addresses" value="{{$customerAddress->id}}">
                                     <span class="mx-2 text-break">{{$customerAddress->country.' '.$customerAddress->state.' '.$customerAddress->zip_code.' '.$customerAddress->city.' '.$customerAddress->address}}</span>
                                     <a class="ms-auto text-decoration-none text-nowrap" href="#">
                                         <i class="fa fa-fw fa-pen-to-square"></i>
@@ -38,26 +38,26 @@
                         <div class="col-lg-12">
                             <div class="card h-100 form-check">
                                 <label class="card-body">
-                                    <input class="form-check-input{{$errors->has('addresses') ? ' is-invalid ' : ''}}" data-bs-toggle="collapse" data-bs-target="#newAddressCollapse:not(.show)" aria-expanded="false" aria-controls="newAddressCollapse" type="radio" name="addresses" value="newAddress">
-                                    <span>{{__('Give new address')}}</span>
-                                    <div class="collapse mt-4" id="newAddressCollapse">
+                                    <input class="form-check-input{{$errors->has('addresses') ? ' is-invalid' : ''}}" {{old('addresses') == 'newAddress' ? 'checked' : ''}} data-bs-toggle="collapse" data-bs-target="#newAddressCollapse:not(.show)" aria-expanded="false" aria-controls="newAddressCollapse" type="radio" name="addresses" value="newAddress">
+                                    <span>{{__('Set new address')}}</span>
+                                    <div class="collapse p-1 mt-4{{old('addresses') == 'newAddress' ? ' show' : ''}}" id="newAddressCollapse">
                                         <div class="row">
-                                            <select id="country" name="country" class="{{$errors->has('country') ? 'is-invalid ' : ''}}selectpicker" title="{{ __('Country') }}" data-live-search="true" data-size="5" data-virtual-scroll="true">
+                                            <select id="country" name="newAddressCountry" class="{{$errors->has('newAddressCountry') ? 'is-invalid ' : ''}}selectpicker" title="{{ __('Country') }}" data-live-search="true" data-size="5" data-virtual-scroll="true">
                                                 @foreach ($countries as $country)
-                                                    <option {{ old('country') == $country->id ? 'selected' : '' }} data-content="<span class='fi fi-{{ strtolower($country->code) }}'></span> {{$country->name}}" value="{{$country->id}}"></option>
+                                                    <option {{ old('newAddressCountry') == $country->id ? 'selected' : '' }} data-content="<span class='fi fi-{{ strtolower($country->code) }}'></span> {{$country->name}}" value="{{$country->id}}"></option>
                                                 @endforeach
                                             </select>
-                                            @if ($errors->has('country'))
+                                            @if ($errors->has('newAddressCountry'))
                                             <div class="text-start invalid-feedback">
-                                                {{ $errors->first('country') }}
+                                                {{ $errors->first('newAddressCountry') }}
                                             </div>
                                             @endif
                                         </div>
                                         <div class="row g-3 mt-1">
-                                            <x-forms.input id="city" name="city" type="text" class="col-lg-4" icon="building" label="{{__('City')}}" placeholder="{{ __('City') }}" />
-                                            <x-forms.input id="state" name="state" type="text" class="col-lg-4" icon="building" label="{{__('State')}}" placeholder="{{ __('State') }}" />
-                                            <x-forms.input id="zip_code" name="zip_code" type="text" class="col-lg-4" icon="at" label="{{_('Zip code')}}" placeholder="{{ __('Zip code') }}" />
-                                            <x-forms.input id="address" name="address" type="text" icon="location-dot" label="{{__('Address')}}" placeholder="{{ __('Address') }}" />
+                                            <x-forms.input id="newAddressCity" name="newAddressCity" type="text" class="col-lg-4" icon="building" label="{{__('City')}}" placeholder="{{ __('City') }}" />
+                                            <x-forms.input id="newAddressState" name="newAddressState" type="text" class="col-lg-4" icon="building" label="{{__('State')}}" placeholder="{{ __('State') }}" />
+                                            <x-forms.input id="newAddressZip_code" name="newAddressZip_code" type="text" class="col-lg-4" icon="at" label="{{_('Zip code')}}" placeholder="{{ __('Zip code') }}" />
+                                            <x-forms.input id="newAddressAddress" name="newAddressAddress" type="text" icon="location-dot" label="{{__('Address')}}" placeholder="{{ __('Address') }}" />
                                             <div class="ms-2">
                                                 <input type="hidden" name="save_address" value="0">
                                                 <x-forms.checkbox id="save_address" name="save_address" value="1" label="{{__('Save this address')}}" errorMessage="{{$errors->has('save_address') ? $errors->first('save_address') : ''}}" />
@@ -67,6 +67,11 @@
                                 </label>
                             </div>
                         </div>
+                        @if ($errors->has('addresses'))
+                            <div class="d-block invalid-feedback">
+                                {{$errors->first('addresses')}}
+                            </div>
+                        @endif
                     </div>
                     @else
                     <div class="row mt-4">
