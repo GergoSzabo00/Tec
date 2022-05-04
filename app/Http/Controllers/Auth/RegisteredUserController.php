@@ -53,7 +53,7 @@ class RegisteredUserController extends Controller
             'terms' => ['required'],
         ]);
 
-        DB::transaction(function () use ($request) 
+        return DB::transaction(function () use ($request) 
         {
             $user = User::create([
                 'email' => $request->email,
@@ -81,11 +81,10 @@ class RegisteredUserController extends Controller
                 'lastname' => $request->lastname,
                 'phone' => $request->phone,
             ]);
+
+            event(new Registered($user));
+
+            return redirect(RouteServiceProvider::HOME);
         });
-
-        event(new Registered($user));
-
-        return redirect(RouteServiceProvider::HOME);
-
     }
 }
