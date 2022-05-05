@@ -13,14 +13,14 @@ class Order extends Model
         'user_id', 'customer_name', 'shipping_address', 'phone', 'order_status', 'payment_option', 'total_price',
     ];
 
-    public function order_status()
+    public function order_status_object()
     {
-        return $this->belongsTo(OrderStatus::class);
+        return $this->belongsTo(OrderStatus::class, 'order_status');
     }
 
-    public function payment_option()
+    public function payment_option_object()
     {
-        return $this->belongsTo(PaymentOption::class);
+        return $this->belongsTo(PaymentOption::class, 'payment_option');
     }
 
     public function order_details()
