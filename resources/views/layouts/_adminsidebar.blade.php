@@ -1,6 +1,6 @@
 <nav class="navbar-dark bg-dark">
     <ul class="navbar-nav sidebar" id="sidebar">
-        <a href="#" class="sidebar-brand d-flex align-items-center justify-content-center p-3">
+        <a href="{{route('home')}}" class="sidebar-brand d-flex align-items-center justify-content-center p-3">
             <img class="logo" src={{url('/images/logo.svg')}} width="40" height="40" alt="Logo">
             <div class="sidebar-brand-text">TechZone</div>
         </a>
