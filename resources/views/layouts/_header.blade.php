@@ -64,12 +64,13 @@
                             @endif  
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="userDropdown">
-                            <li><a class="dropdown-item" href="#"><i class="fa fa-user"></i> {{ __('Profile') }}</a></li>
+                            <li><a class="dropdown-item" href="#"><i class="fa fa-fw fa-user"></i> {{ __('Profile') }}</a></li>
+                            <li><a class="dropdown-item" href="{{route('recent.orders')}}"><i class="fa fa-fw fa-basket-shopping"></i> {{ __('My orders') }}</a></li>
                             <li><hr class="dropdown-divider"></li>
                             <li>
                                 <form method="POST" action="{{ route('logout') }}">
                                     @csrf
-                                    <button class="dropdown-item" type="submit"><i class="fa fa-sign-out"></i> {{ __('Logout') }}</button>
+                                    <button class="dropdown-item" type="submit"><i class="fa fa-fw fa-sign-out"></i> {{ __('Logout') }}</button>
                                 </form>   
                             </li>
                         </ul>

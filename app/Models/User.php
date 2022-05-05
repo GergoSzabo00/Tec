@@ -52,4 +52,9 @@ class User extends Authenticatable
         return $this->belongsToMany(Address::class, 'customer_addresses', 'customer_id', 'address_id')->withTimestamps();
     }
 
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
+
 }
