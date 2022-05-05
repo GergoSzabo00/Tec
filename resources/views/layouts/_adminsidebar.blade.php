@@ -19,7 +19,7 @@
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#">
+            <a class="nav-link{{request()->routeIs('orders', 'order.edit', 'order.details') ? ' active': ''}}" href="{{route('orders')}}">
                 <i class="fa fa-fw fa-basket-shopping"></i>
                 <span>{{__('Orders')}}</span>
             </a>
@@ -57,7 +57,7 @@
             </div>
         </li>
         <li class="nav-item">
-            <a class="nav-link collapsed{{request()->routeIs('products', 'product.create', 'product.edit') ? ' active': ''}}" href="#collapseProducts" role="button" data-bs-toggle="collapse" aria-expanded="false" aria-controls="collapseProducts">
+            <a class="nav-link collapsed{{request()->routeIs('products', 'product.details', 'product.create', 'product.edit') ? ' active': ''}}" href="#collapseProducts" role="button" data-bs-toggle="collapse" aria-expanded="false" aria-controls="collapseProducts">
                 <i class="fa fa-fw fa-box"></i>
                 <span>{{__('Products')}}</span>
             </a>

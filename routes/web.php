@@ -34,6 +34,13 @@ Route::middleware('admin')->group(function ()
 {
     Route::get('admin', [Controllers\Admin\AdminController::class, 'index'])->name('admin');
 
+    // Order controllers
+    Route::get('admin/orders', [Controllers\Admin\OrderController::class, 'index'])->name('orders');
+    Route::get('admin/orders/{order}', [Controllers\Admin\OrderController::class, 'show'])->name('order.details');
+    Route::get('admin/orders/{order}/edit', [Controllers\Admin\OrderController::class, 'edit'])->name('order.edit');
+    Route::post('admin/orders/{order}/edit', [Controllers\Admin\OrderController::class, 'update']);
+    Route::post('admin/orders/delete', [Controllers\Admin\OrderController::class, 'destroy'])->name('order.delete');
+
     // Manufacturer controllers
     Route::get('admin/manufacturers', [Controllers\Admin\ManufacturerController::class, 'index'])->name('manufacturers');
     Route::get('admin/manufacturers/create', [Controllers\Admin\ManufacturerController::class, 'create'])->name('manufacturer.create');
