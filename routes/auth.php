@@ -8,6 +8,7 @@ use App\Http\Controllers\Auth\NewPasswordController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\VerifyEmailController;
+use App\Http\Controllers\AddressesController;
 use App\Http\Controllers\OrderHistoryController;
 use Illuminate\Support\Facades\Route;
 
@@ -36,6 +37,13 @@ Route::middleware('guest')->group(function () {
 });
 
 Route::middleware('auth')->group(function () {
+
+    Route::get('addresses', [AddressesController::class, 'index'])->name('addresses');
+    Route::get('addresses/create', [AddressesController::class, 'create'])->name('address.create');
+    Route::post('addresses/create', [AddressesController::class, 'store']);
+    Route::get('addresses/{address}/edit', [AddressesController::class, 'edit'])->name('address.edit');
+    Route::post('addresses/{address}/edit', [AddressesController::class, 'update']);
+    Route::post('addresses/delete', [AddressesController::class, 'destroy'])->name('address.delete');
 
     Route::get('orders', [OrderHistoryController::class, 'index'])->name('recent.orders');
 
