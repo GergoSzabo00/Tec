@@ -27,7 +27,7 @@
                                 <label class="d-flex card-body">
                                     <input class="form-check-input flex-shrink-0{{$errors->has('addresses') ? ' is-invalid' : ''}}" {{old('addresses') == $customerAddress->id ? 'checked' : ''}} data-bs-toggle="collapse" data-bs-target="#newAddressCollapse.show" aria-expanded="false" aria-controls="newAddressCollapse" type="radio" name="addresses" value="{{$customerAddress->id}}">
                                     <span class="mx-2 text-break">{{$customerAddress->country.' '.$customerAddress->state.' '.$customerAddress->zip_code.' '.$customerAddress->city.' '.$customerAddress->address}}</span>
-                                    <a class="ms-auto text-decoration-none text-nowrap" href="#">
+                                    <a class="ms-auto text-decoration-none text-nowrap" href="{{route('address.edit', $customerAddress)}}">
                                         <i class="fa fa-fw fa-pen-to-square"></i>
                                         {{__('Edit')}}
                                     </a>
