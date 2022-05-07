@@ -9,6 +9,7 @@ use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\VerifyEmailController;
 use App\Http\Controllers\AddressesController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\OrderHistoryController;
 use Illuminate\Support\Facades\Route;
 
@@ -37,6 +38,10 @@ Route::middleware('guest')->group(function () {
 });
 
 Route::middleware('auth')->group(function () {
+
+    Route::get('profile', [ProfileController::class, 'index'])->name('profile');
+    Route::post('profile/update-personal-info', [ProfileController::class, 'updatePersonalInfo'])->name('update.personal.info');
+    Route::post('profile/change-password', [ProfileController::class, 'changePassword'])->name('change.password');
 
     Route::get('addresses', [AddressesController::class, 'index'])->name('addresses');
     Route::get('addresses/create', [AddressesController::class, 'create'])->name('address.create');
