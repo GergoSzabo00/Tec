@@ -12,27 +12,25 @@
         @endif
         <div class="card border-0 shadow">
             <div class="card-body p-5 text-center">
-                <form method="POST" action="{{ route('login') }}">
+                <form method="POST" action="{{ route('password.email') }}">
                     @csrf
                     <div class="mb-4">
                         <img src="images/logo.svg" width="120" height="120">
-                        <h3>{{ __('Login') }}</h3>
+                        <h3>{{ __('Forgot password') }}</h3>
                     </div>
-                    @if($errors->has('login.invalid'))
-                        <div class="alert alert-danger" role="alert">
-                            {{ $errors->first('login.invalid') }}
-                        </div>
-                    @endif
+                    <p>{{__('Type in your email address and you will receive a link in order to set a new password for your account.')}}</p>
                     <div class="row g-3">
                         <x-forms.input id="email" name="email" type="email" icon="envelope" placeholder="{{ __('Email') }}" />
-                        <x-forms.input id="password" name="password" type="password" icon="lock" placeholder="{{ __('Password') }}" />
                     </div>
                     <div class="d-grid my-3">
-                        <button type="submit" class="btn btn-primary btn-lg rounded-pill">{{ __('Login') }}</button>
+                        <button type="submit" class="btn btn-primary btn-lg rounded-pill">{{ __('Reset password') }}</button>
                     </div>
-                    <a href="{{route('password.request')}}" class="text-decoration-none">{{ __('Forgot password') }}</a>
+                    <a href="{{route('login')}}" class="text-decoration-none">
+                        {{ __('Back to login') }}
+                    </a>
                 </form> 
             </div>
         </div>
+    </div>
 </div>
 @endsection
