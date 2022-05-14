@@ -9,8 +9,11 @@ use App\Models\OrderDetail;
 use App\Models\OrderStatus;
 use App\Models\PaymentOption;
 use App\Models\Product;
+use App\Models\StoreInfo;
+use App\Mail\OrderPlaced;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use App\Http\Requests\CheckoutRequest;
 use Illuminate\Http\Request;
 
@@ -56,10 +59,14 @@ class CheckoutController extends Controller
             $customer_name = $request->firstname.' '.$request->lastname;
 
             $country = Country::find($request->country);
+
+            $shippingCost = StoreInfo::first()->shipping_cost;
             
             $shipping_address = null;
 
             $user_id = null;
+
+            $email = $request->email;
 
             if(auth()->check())
             {
@@ -104,15 +111,19 @@ class CheckoutController extends Controller
 
             $totalPrice = 0;
 
+            $subtotal = 0;
+
             foreach($cartItems as $key => $cartItem)
             {
                 $product = Product::find($key);
 
                 if($product != null)
                 {
-                    $totalPrice += $product->price * $cartItem['quantity'];
+                    $subtotal += $product->price * $cartItem['quantity'];
                 }
             }
+
+            $totalPrice += $subtotal + $shippingCost;
 
             $order = Order::create([
                 'user_id' => $user_id,
@@ -140,14 +151,15 @@ class CheckoutController extends Controller
                         'bought_quantity' => $quantity,
                         'price' => $price
                     ]);
-                    $totalPrice += $product->price * $cartItem['quantity'];
                 }
             }
+
+
+            Mail::to($email)->send(new OrderPlaced($order, $subtotal, $shippingCost));
 
             session()->forget('cart');
 
             return redirect('checkout')->with('success', __('Order placed successfully!'));
-
         });
     }
 }
