@@ -17,6 +17,8 @@ use App\Http\Controllers\Controller;
 */
 
 Route::get('/', [Controllers\HomeController::class, 'index'])->name('home');
+Route::post('products/search', [Controllers\HomeController::class, 'searchProduct'])->name('search.product');
+Route::get('products/{product}', [Controllers\HomeController::class, 'show'])->name('user.product.detail');
 
 // Cart controllers
 Route::get('cart', [Controllers\CartController::class, 'index'])->name('cart');
