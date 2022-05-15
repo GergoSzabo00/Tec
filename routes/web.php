@@ -39,6 +39,7 @@ Route::post('checkout',  [Controllers\CheckoutController::class, 'store']);
 Route::middleware('admin')->group(function () 
 {
     Route::get('admin', [Controllers\Admin\AdminController::class, 'index'])->name('admin');
+    Route::get('monthly-sales', [Controllers\Admin\AdminController::class, 'getMonthlySales'])->name('get.monthly.sales');
 
     // Order controllers
     Route::get('admin/orders', [Controllers\Admin\OrderController::class, 'index'])->name('orders');
