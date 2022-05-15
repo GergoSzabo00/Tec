@@ -31,7 +31,7 @@
                     <div class="row g-3 mt-1">
                         <x-forms.input id="city" name="city" type="text" class="col-lg-4" icon="building" label="{{__('City')}}" placeholder="{{ __('City') }}" value="{{$address->city}}" />
                         <x-forms.input id="state" name="state" type="text" class="col-lg-4" icon="building" label="{{__('State')}}" placeholder="{{ __('State') }}" value="{{$address->state}}" />
-                        <x-forms.input id="zip_code" name="zip_code" type="text" class="col-lg-4" icon="at" label="{{_('Zip code')}}" placeholder="{{ __('Zip code') }}" value="{{$address->zip_code}}" />
+                        <x-forms.input id="zip_code" name="zip_code" type="text" class="col-lg-4" icon="at" label="{{__('Zip code')}}" placeholder="{{ __('Zip code') }}" value="{{$address->zip_code}}" />
                         <x-forms.input id="address" name="address" type="text" class="col-lg-6" icon="location-dot" label="{{__('Address')}}" placeholder="{{ __('Address') }}" value="{{$address->address}}" />
                     </div>
                     <button class="btn btn-primary mt-4 float-end" type="submit">
