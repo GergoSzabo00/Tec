@@ -26,7 +26,7 @@
                         <li class="nav-item"><a href="{{ route('admin') }}" class="nav-link px-2">{{ __('Administration') }}</a></li>
                     @endif
                 @endauth
-                <li class="nav-item"><a href="#" class="nav-link px-2">{{ __('Services') }}</a></li>
+                <li class="nav-item"><a href="{{route('services')}}" class="nav-link px-2">{{ __('Services') }}</a></li>
                 <li class="nav-item"><a href="{{route('contact')}}" class="nav-link px-2">{{ __('Contact') }}</a></li>
             </ul>
             <div class="dropdown">
