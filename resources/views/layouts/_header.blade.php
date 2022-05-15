@@ -88,10 +88,10 @@
             @else
                 <div class="ms-2">
                     <a href="{{ route('login') }}" class="btn btn-dark btn-sm">
-                        <i class="fa-solid fa-arrow-right-to-bracket"></i> Login
+                        <i class="fa-solid fa-arrow-right-to-bracket"></i> {{__('Login')}}
                     </a>
                     <a href="{{ route('register') }}" class="btn btn-dark btn-sm">
-                        <i class="fa-solid fa-user-plus"></i> Register
+                        <i class="fa-solid fa-user-plus"></i> {{__('Register')}}
                     </a>
                 </div>
             @endauth
