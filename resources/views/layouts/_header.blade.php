@@ -27,7 +27,7 @@
                     @endif
                 @endauth
                 <li class="nav-item"><a href="#" class="nav-link px-2">{{ __('Services') }}</a></li>
-                <li class="nav-item"><a href="#" class="nav-link px-2">{{ __('Contact') }}</a></li>
+                <li class="nav-item"><a href="{{route('contact')}}" class="nav-link px-2">{{ __('Contact') }}</a></li>
             </ul>
             <div class="dropdown">
                 <a href="#" class="btn btn-sm" data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button" aria-expanded="false">

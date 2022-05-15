@@ -20,6 +20,8 @@ Route::get('/', [Controllers\HomeController::class, 'index'])->name('home');
 Route::post('products/search', [Controllers\HomeController::class, 'searchProduct'])->name('search.product');
 Route::get('products/{product}', [Controllers\HomeController::class, 'show'])->name('user.product.detail');
 
+Route::get('contact', [Controllers\ContactController::class, 'index'])->name('contact');
+
 // Cart controllers
 Route::get('cart', [Controllers\CartController::class, 'index'])->name('cart');
 Route::get('get-cart-info', [Controllers\CartController::class, 'getCartInfo'])->name('get.cart.info');
