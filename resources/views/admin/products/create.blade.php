@@ -7,7 +7,7 @@
     $(document).ready(function() {
         ClassicEditor
         .create(document.querySelector('#description'), {
-            language: 'en',
+            language: '{{app()->getLocale()}}',
         })
         .catch(error => {
             console.error( error )
@@ -51,7 +51,7 @@
                         <x-forms.input id="product_name" name="product_name" icon="rectangle-list" label="{{ __('Product name') }}" placeholder="{{ __('Product name') }}" />
                         <x-forms.input type="number" id="price" name="price" icon="dollar" label="{{ __('Price') }}" placeholder="{{ __('Price') }}" min="0" max="99999999.99" step=".01" />
                         <div>
-                            <label for="description">Description</label>
+                            <label for="description">{{__('Description')}}</label>
                             <textarea class="form-control" id="description" name="description" rows="5"></textarea>
                         </div>
                         <div class="mb-3">
