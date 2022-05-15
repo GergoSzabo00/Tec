@@ -84,6 +84,11 @@ return [
 
     'locale' => 'en',
 
+    'available_locales' => [
+        'en' =>  ['icon' => 'us'],
+        'hu' =>  ['icon' => 'hu']
+    ],
+
     /*
     |--------------------------------------------------------------------------
     | Application Fallback Locale

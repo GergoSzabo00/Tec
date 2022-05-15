@@ -24,6 +24,8 @@ Route::get('services', [Controllers\ServicesController::class, 'index'])->name('
 
 Route::get('contact', [Controllers\ContactController::class, 'index'])->name('contact');
 
+Route::get('lang/{locale}', [Controllers\LocalizationController::class, 'setLocale'])->name('set.locale');
+
 // Cart controllers
 Route::get('cart', [Controllers\CartController::class, 'index'])->name('cart');
 Route::get('get-cart-info', [Controllers\CartController::class, 'getCartInfo'])->name('get.cart.info');

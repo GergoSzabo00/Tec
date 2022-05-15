@@ -1,4 +1,26 @@
 <header>
+    <div class="bg-dark">
+        <div class="container">
+            <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-end">
+                <div class="dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" id="languageDropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fi fi-{{config('app.available_locales')[App::currentLocale()]['icon']}}"></i>
+                        {{__('languages.'.App::currentLocale().'')}}
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="languageDropdownMenuLink">
+                        @foreach(config('app.available_locales') as $key => $value)
+                        <li>
+                            <a href="{{route('set.locale', $key)}}" class="dropdown-item">
+                                <i class="fi fi-{{$value['icon']}}"></i>
+                                {{__('languages.'.$key.'')}}
+                            </a>
+                        </li>
+                        @endforeach
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
     <nav class="navbar bg-white navbar-light">
         <button class="btn rounded-circle ms-3" id="sidebarToggler" type="button">
             <i class="fa fa-bars"></i>

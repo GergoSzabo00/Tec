@@ -4,10 +4,18 @@
             <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-end">
                 <div class="dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" id="languageDropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                        Selected language
+                        <i class="fi fi-{{config('app.available_locales')[App::currentLocale()]['icon']}}"></i>
+                        {{__('languages.'.App::currentLocale().'')}}
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="languageDropdownMenuLink">
-                        <li><a href="#" class="dropdown-item">Other language</a></li>
+                        @foreach(config('app.available_locales') as $key => $value)
+                        <li>
+                            <a href="{{route('set.locale', $key)}}" class="dropdown-item">
+                                <i class="fi fi-{{$value['icon']}}"></i>
+                                {{__('languages.'.$key.'')}}
+                            </a>
+                        </li>
+                        @endforeach
                     </ul>
                 </div>
             </div>
