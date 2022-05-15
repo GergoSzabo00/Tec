@@ -53,7 +53,7 @@
                 </div>
                 <div class="mt-auto">
                     <p class="card-text">
-                        {{__("It can happen that the chosen product will fail, it doesn't satisfy your expectations. If the warranty is not expired yet, we can pay your money back.")}}
+                        {{__("It can happen that the chosen product will fail, or it doesn't satisfy your expectations. If the warranty is not expired yet, we can pay your money back.")}}
                     </p>
                 </div>
             </div>
