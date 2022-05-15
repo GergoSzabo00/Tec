@@ -19,7 +19,6 @@ class StoreInfoSeeder extends Seeder
         StoreInfo::create([
             'address' => 'Fictional Street',
             'phone' => '06123456789',
-            'email' => 'support@techzone.com',
             'shipping_cost' => 10.87
         ]);
     }

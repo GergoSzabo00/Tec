@@ -16,7 +16,6 @@ class StoreSettingsRequest extends FormRequest
         return [
             'address' => 'required|min:2|max:255',
             'phone' => 'required|max:15',
-            'email' => 'required|string|email|max:255',
             'shipping_cost' => 'required|numeric|between:0,99.99'
         ];
     }

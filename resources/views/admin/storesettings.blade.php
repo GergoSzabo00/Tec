@@ -17,7 +17,6 @@
                         <h5>{{__('Contact info')}}</h5>
                         <x-forms.input id="address" name="address" icon="location-dot" label="{{ __('Address') }}" placeholder="{{ __('Address') }}" value="{{$storeInfo->address}}" />
                         <x-forms.input id="phone" name="phone" icon="phone" label="{{ __('Phone') }}" placeholder="{{ __('Phone') }}" value="{{$storeInfo->phone}}" />
-                        <x-forms.input id="email" name="email" type="email" icon="envelope" label="{{ __('Email') }}" placeholder="{{ __('Email') }}" value="{{$storeInfo->email}}" />
                     </div>
                 </div>
             </div>
