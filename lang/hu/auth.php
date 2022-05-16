@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'failed' => 'Érvénytelen email vagy jelszó.',
+    'failed' => 'Érvénytelen email vagy jelszó. Vagy nem erősítetted meg az email címed.',
     'password' => 'A megadott jelszó érvénytelen.',
     'throttle' => 'Túl sok bejelentkezési kísérlet. Kérlek próbáld újra :seconds másodperc múlva.',
 

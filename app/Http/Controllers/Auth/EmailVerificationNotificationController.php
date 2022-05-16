@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
+use App\Models\User;
 
 class EmailVerificationNotificationController extends Controller
 {
@@ -15,13 +16,22 @@ class EmailVerificationNotificationController extends Controller
      * @return \Illuminate\Http\RedirectResponse
      */
     public function store(Request $request)
-    {
-        if ($request->user()->hasVerifiedEmail()) {
+    {   
+        $email = $request->email;
+
+        $user = User::where('email', $email)->first();
+
+        if ($user == null)
+        {
             return redirect()->intended(RouteServiceProvider::HOME);
         }
 
-        $request->user()->sendEmailVerificationNotification();
+        if ($user->hasVerifiedEmail()) {
+            return redirect()->intended(RouteServiceProvider::HOME);
+        }
 
-        return back()->with('status', 'verification-link-sent');
+        $user->sendEmailVerificationNotification();
+
+        return back()->with('status', __('verification.verification-link-resent'));
     }
 }

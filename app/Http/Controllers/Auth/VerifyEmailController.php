@@ -5,26 +5,45 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Verified;
-use Illuminate\Foundation\Auth\EmailVerificationRequest;
+use App\Http\Requests\Auth\EmailVerificationRequest;
+use App\Models\User;
 
 class VerifyEmailController extends Controller
 {
     /**
      * Mark the authenticated user's email address as verified.
      *
-     * @param  \Illuminate\Foundation\Auth\EmailVerificationRequest  $request
+     * @param  \App\Http\Requests\Auth\EmailVerificationRequest  $request
      * @return \Illuminate\Http\RedirectResponse
      */
     public function __invoke(EmailVerificationRequest $request)
     {
-        if ($request->user()->hasVerifiedEmail()) {
-            return redirect()->intended(RouteServiceProvider::HOME.'?verified=1');
+        $user = User::findOrfail($request->route('id'));
+
+        if ($user == null)
+        {
+            return redirect()->intended(RouteServiceProvider::HOME);
         }
 
-        if ($request->user()->markEmailAsVerified()) {
-            event(new Verified($request->user()));
+        if ($user->hasVerifiedEmail()) {
+            return redirect()->intended(route('login').'?verified=1');
         }
 
-        return redirect()->intended(RouteServiceProvider::HOME.'?verified=1');
+        
+
+        if($this->verify($user))
+        {
+            event(new Verified($user));
+        }
+
+        return redirect()->intended(route('login').'?verified=1');
     }
+
+    private function verify($user)
+    {
+        return $user->forceFill([
+            'is_verified' => 1,
+        ])->save();
+    }
+
 }

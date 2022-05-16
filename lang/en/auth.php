@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'failed' => 'Invalid email or password.',
+    'failed' => 'Invalid email or password. Or your email is not verified.',
     'password' => 'The provided password is incorrect.',
     'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
 

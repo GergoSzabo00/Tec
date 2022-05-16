@@ -84,7 +84,9 @@ class RegisteredUserController extends Controller
 
             event(new Registered($user));
 
-            return redirect(RouteServiceProvider::HOME);
+            session()->put('email', $user->email);
+
+            return redirect()->route('verification.notice')->with('status', __('verification.verification-link-sent'));
         });
     }
 }

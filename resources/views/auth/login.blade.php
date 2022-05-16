@@ -3,6 +3,13 @@
 @section('content')
 <div class="row d-flex justify-content-center align-items-center min-vh-100">
     <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+        @if (request()->get('verified') == 1)
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <i class="fa fa-fw fa-circle-check"></i>
+                <span>{{__('verification.verified')}}</span>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @endif
         @if (Session::has('status'))
             <div class="alert alert-success alert-dismissible fade show" role="alert">
                 <i class="fa fa-fw fa-circle-check"></i>
