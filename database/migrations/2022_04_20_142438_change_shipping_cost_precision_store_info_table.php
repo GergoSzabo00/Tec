@@ -26,7 +26,10 @@ return new class extends Migration
     public function down()
     {
         Schema::table('store_info', function(Blueprint $table){
-            $table->decimal('shipping_cost', 2, 2)->change();
+            $table->dropColumn('shipping_cost');
+        });
+        Schema::table('store_info', function(Blueprint $table){
+            $table->decimal('shipping_cost', 2, 2);
         });
     }
 };
