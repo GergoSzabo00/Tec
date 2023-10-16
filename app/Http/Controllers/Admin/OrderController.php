@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Models\Order;
 use App\Models\OrderDetail;
 use App\Models\OrderStatus;
+use App\Models\PaymentOption;
 use Yajra\Datatables\Datatables;
 
 class OrderController extends Controller
@@ -95,7 +96,9 @@ class OrderController extends Controller
     public function show(Order $order)
     {
         $orderDetails = $order->order_details;
-        return view('admin.orders.show')->with(compact('order', 'orderDetails'));
+        $orderStatusName = $order->order_status_object->name;
+        $paymentOptionName = $order->payment_option_object->name;
+        return view('admin.orders.show')->with(compact('order', 'orderDetails', 'orderStatusName', 'paymentOptionName'));
     }
 
     /**

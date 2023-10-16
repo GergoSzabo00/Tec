@@ -13,6 +13,14 @@
             <div class="card-body">
                 <h3 class="card-title">{{__('Order')}} #{{$order->id}}</h3>
                 <p>{{__('Order date')}}: {{$order->created_at->isoFormat('L')}}</p>
+                <dl>
+                    <dl><span class="fw-bold">{{__('Customer name')}}:</span> {{ $order->customer_name }}</dl>
+                    <dl><span class="fw-bold">{{__('Shipping address')}}:</span> {{ $order->shipping_address }}</dl>
+                    <dl><span class="fw-bold">{{__('Order status')}}:</span> <span class="badge bg-secondary rounded-pill">{{ __($orderStatusName) }}</span></dl>
+                    <dl><span class="fw-bold">{{__('Payment method')}}:</span> <span class="badge bg-secondary rounded-pill">{{ __($paymentOptionName) }}</span></dl>
+                </dl>
+                <hr>
+                <h5>{{ __('Products') }}</h5>
                 @foreach($orderDetails as $orderDetail)
                     <div class="d-flex">
                         <span class="text-break"><span class="text-muted">{{$orderDetail->bought_quantity}}x</span> {{$orderDetail->product_name}}</span>
