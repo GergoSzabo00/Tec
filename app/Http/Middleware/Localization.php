@@ -17,12 +17,13 @@ class Localization
      */
     public function handle(Request $request, Closure $next)
     {
-        if(session()->has('locale'))
+        $localeCookie = $request->cookie('locale');
+
+        if(isset($localeCookie))
         {
-            $locale = session()->get('locale');
-            if(array_key_exists($locale, config('app.available_locales')))
+            if(array_key_exists($localeCookie, config('app.available_locales')))
             {
-                App::setLocale($locale);
+                App::setLocale($localeCookie);
             }            
         }
         return $next($request);
