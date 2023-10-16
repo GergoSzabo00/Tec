@@ -19,8 +19,8 @@
                 {data: 'checkbox', orderable: false, searchable: false},
                 {data: 'code', orderable: true, searchable: true},
                 {data: 'type', orderable: true, searchable: false},
-                {data: 'amount', orderable: true, searchable: false},
-                {data: 'minimal_cart_amount', orderable: true, searchable: false},
+                {data: 'coupon_value', orderable: true, searchable: false},
+                {data: 'minimum_cart_amount', orderable: true, searchable: false},
                 {data: 'expires_at', orderable: true, searchable: false},
                 {data: 'created_at', orderable: true, searchable: false},
                 {data: 'action', orderable: false, searchable: false}
