@@ -15,6 +15,11 @@ class OrderStatus extends Model
         'name',
     ];
 
+    public function getNameAttribute()
+    {
+        return __($this->attributes['name']);
+    }
+
     public function orders()
     {
         return $this->hasMany(Order::class);
