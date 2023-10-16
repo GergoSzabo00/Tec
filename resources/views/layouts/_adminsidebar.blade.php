@@ -73,6 +73,22 @@
             </div>
         </li>
         <li class="nav-item">
+            <a class="nav-link collapsed{{request()->routeIs('coupons', 'coupon.details', 'coupon.create', 'coupon.edit') ? ' active': ''}}" href="#collapseCoupons" role="button" data-bs-toggle="collapse" aria-expanded="false" aria-controls="collapseCoupons">
+                <i class="fa fa-fw fa-gifts"></i>
+                <span>{{__('Coupons')}}</span>
+            </a>
+            <div class="collapse" id="collapseCoupons" data-bs-parent="#sidebar">
+                <div class="card bg-black">
+                    <a href="{{route('coupons')}}" class="nav-link">
+                        <i class="fa fa-fw fa-list-ul"></i> {{__('All Coupons')}}
+                    </a>
+                    <a href="{{route('coupon.create')}}" class="nav-link{{request()->routeIs('coupon.create') ? ' active': ''}}">
+                        <i class="fa fa-fw fa-circle-plus"></i> {{__('Add Coupon')}}
+                    </a>
+                </div>
+            </div>
+        </li>
+        <li class="nav-item">
             <a class="nav-link{{request()->routeIs('users', 'user.edit') ? ' active': ''}}" href="{{route('users')}}">
                 <i class="fa fa-fw fa-users"></i>
                 <span>{{__('Users')}}</span>
