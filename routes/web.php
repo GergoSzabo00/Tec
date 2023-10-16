@@ -75,6 +75,14 @@ Route::middleware('admin')->group(function ()
     Route::post('admin/products/{product}/edit', [Controllers\Admin\ProductController::class, 'update']);
     Route::post('admin/products/delete', [Controllers\Admin\ProductController::class, 'destroy'])->name('product.delete');
 
+    // Coupon controllers
+    Route::get('admin/coupons', [Controllers\Admin\CouponController::class, 'index'])->name('coupons');
+    Route::get('admin/coupons/create', [Controllers\Admin\CouponController::class, 'create'])->name('coupon.create');
+    Route::post('admin/coupons/create', [Controllers\Admin\CouponController::class, 'store']);
+    Route::get('admin/coupons/{coupon}/edit', [Controllers\Admin\CouponController::class, 'edit'])->name('coupon.edit');
+    Route::post('admin/coupons/{coupon}/edit', [Controllers\Admin\CouponController::class, 'update']);
+    Route::post('admin/coupons/delete', [Controllers\Admin\CouponController::class, 'destroy'])->name('coupon.delete');
+
     // Users controllers
     Route::get('admin/users', [Controllers\Admin\UserController::class, 'index'])->name('users');
     Route::get('admin/users/{user}/edit', [Controllers\Admin\UserController::class, 'edit'])->name('user.edit');
