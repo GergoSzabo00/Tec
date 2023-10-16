@@ -60,7 +60,7 @@
                                             <x-forms.input id="newAddressAddress" name="newAddressAddress" type="text" icon="location-dot" label="{{__('Address')}}" placeholder="{{ __('Address') }}" />
                                             <div class="ms-2">
                                                 <input type="hidden" name="save_address" value="0">
-                                                <x-forms.checkbox id="save_address" name="save_address" value="1" label="{{__('Save this address')}}" errorMessage="{{$errors->has('save_address') ? $errors->first('save_address') : ''}}" />
+                                                <x-forms.checkbox id="save_address" name="save_address" value="1" label="{{__('Save address')}}" errorMessage="{{$errors->has('save_address') ? $errors->first('save_address') : ''}}" />
                                             </div>
                                         </div>
                                     </div>
