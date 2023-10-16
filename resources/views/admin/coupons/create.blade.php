@@ -45,7 +45,12 @@
                 valueInput.prop('max', 100);
                 valueInput.prop('step', 1);
 
+                if(isNaN(valueInput.val()) || valueInput.val().trim() === "") {
+                    return;
+                }
+
                 let value = parseFloat(valueInput.val());
+
                 let snappedValue = Math.round(value / 1);
 
                 if (snappedValue < 1) {
