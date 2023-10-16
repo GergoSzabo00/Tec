@@ -65,7 +65,7 @@ class CouponController extends Controller
         $coupon = Coupon::create([
             'code' => $request->code,
             'type' => $request->type,
-            'amount' => $request->amount,
+            'value' => $request->value,
             'minimal_cart_amount' => $request->minimal_cart_amount,
             'expires_at' => $request->expires_at
         ]);
