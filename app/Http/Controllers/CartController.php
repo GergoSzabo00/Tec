@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\StoreInfo;
+use App\Models\Coupon;
 
 class CartController extends Controller
 {
@@ -19,6 +20,32 @@ class CartController extends Controller
     }
 
     /**
+     * Gets the discount for the cart.
+     *
+     * @return int
+     */
+    private function getDiscount($cart, $total) {
+
+        if (!isset($cart['coupon_code']))
+        {
+            return 0;
+        }
+
+        $coupon = Coupon::where('code', $cart['coupon_code'])->first();
+
+        if (!$coupon) {
+            unset($cart['coupon_code']);
+            return 0;
+        }
+
+        if ($coupon->type == 'numeric') {
+            return $coupon->coupon_value;
+        } else {
+            return ($total * $coupon->coupon_value) / 100;
+        }
+    }
+
+    /**
      * Gets number of items in cart, the items themselves from the cart
      * and the total price of the items in the cart.
      *
@@ -28,10 +55,20 @@ class CartController extends Controller
     {
         $shippingCost = StoreInfo::first()->shipping_cost;
         
+        $couponDiscount = 0;
         $cartItemCount = 0;
         $subtotal = 0;
         $totalPrice = 0;
-        $cartItems = session()->get('cart', []); 
+        $cart = session()->get('cart', []);
+        $couponCode = '';
+
+        $cartItems = [];
+
+        if (!isset($cart['items'])) {
+            $cart['items'] = [];
+        }
+
+        $cartItems = $cart['items'];
 
         foreach($cartItems as $item)
         {
@@ -42,14 +79,28 @@ class CartController extends Controller
         if(!empty($cartItems))
         {
             $totalPrice = $subtotal + $shippingCost;
+        } else {
+            unset($cart['coupon_code']);
+            session()->put('cart', $cart);
         }
+
+        if(isset($cart['coupon_code'])) {
+            $couponCode = $cart['coupon_code'];
+        }
+
+        
+        $couponDiscount = $this->getDiscount($cart, $totalPrice);
+
+        $totalPrice -= $couponDiscount;
         
         return response()->json([
             'cartItemCount' => $cartItemCount,
             'cartItems' => $cartItems,
             'subtotal' => $subtotal,
             'shippingCost' => $shippingCost,
-            'totalPrice' => $totalPrice
+            'totalPrice' => $totalPrice,
+            'couponCode' => $couponCode,
+            'couponDiscount' => $couponDiscount,
         ]);
     }
 
@@ -75,15 +126,19 @@ class CartController extends Controller
             return;
         }
 
-        $cartItems = session()->get('cart', []);
+        $cart = session()->get('cart', []);
 
-        if(isset($cartItems[$request->id]))
+        if (!isset($cart['items'])) {
+            $cart['items'] = [];
+        }
+
+        if(isset($cart['items'][$request->id]))
         {
-            $cartItems[$request->id]['quantity']++;
+            $cart['items'][$request->id]['quantity']++;
         }
         else
         {
-            $cartItems[$request->id] = 
+            $cart['items'][$request->id] = 
             [
                 'product_name' => $product->product_name,
                 'quantity' => 1,
@@ -92,7 +147,7 @@ class CartController extends Controller
             ];
         }
 
-        session()->put('cart', $cartItems);
+        session()->put('cart', $cart);
 
         return response()->json(['data'=>'success']);
     }
@@ -110,11 +165,15 @@ class CartController extends Controller
             return;
         }
 
-        $cartItems = session()->get('cart', []);
+        $cart = session()->get('cart', []);
 
-        $cartItems[$request->id]['quantity'] = $request->quantity;
+        if(!isset($cart['items'])) {
+            $cart['items'] = [];
+        }
 
-        session()->put('cart', $cartItems);
+        $cart['items'][$request->id]['quantity'] = $request->quantity;
+
+        session()->put('cart', $cart);
 
         return response()->json(['data'=>'success']);
     }
@@ -127,12 +186,12 @@ class CartController extends Controller
      */
     public function removeFromCart(Request $request)
     {
-        $cartItems = session()->get('cart', []);
+        $cart = session()->get('cart', []);
 
-        if(isset($cartItems[$request->id])) 
+        if(isset($cart['items'][$request->id])) 
         {
-            unset($cartItems[$request->id]);
-            session()->put('cart', $cartItems);
+            unset($cart['items'][$request->id]);
+            session()->put('cart', $cart);
         }
 
         return response()->json(['data'=>'success']);
@@ -148,6 +207,38 @@ class CartController extends Controller
         session()->forget('cart');
 
         return response()->json(['data'=>'success']);
+    }
+
+    /**
+     * Applies coupon for the cart if the coupon code is valid
+     *
+     * @param \Illuminate\Http\Request
+     * @return \Illuminate\Http\Response
+     */
+    public function applyCoupon(Request $request) 
+    {
+        $cart = session()->get('cart', []);
+
+        if (!isset($cart['items']))
+        {
+            return response()->json(['status'=>422, 'error'=>'Cannot apply coupon code while cart is empty!', 422]);
+        }
+
+        if (empty($cart['items'])) {
+            return response()->json(['status'=>422, 'error'=>'Cannot apply coupon code while cart is empty!', 422]);
+        }
+
+        $coupon = Coupon::where('code', $request->code)->first();
+
+        if(!$coupon) {
+            return response()->json(['status'=>404, 'error'=>'Invalid coupon code!'], 404);
+        }
+
+        $cart['coupon_code'] = $coupon->code;
+
+        session()->put('cart', $cart);
+
+        return response()->json(['status'=>200, 'data'=>'success']);
     }
 
 }

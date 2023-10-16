@@ -33,6 +33,7 @@ Route::post('add-to-cart', [Controllers\CartController::class, 'addToCart'])->na
 Route::post('update-cart-quantity', [Controllers\CartController::class, 'updateCartQuantity'])->name('update.cart.quantity');
 Route::post('remove-from-cart', [Controllers\CartController::class, 'removeFromCart'])->name('remove.from.cart');
 Route::post('remove-all-from-cart', [Controllers\CartController::class, 'removeAllFromCart'])->name('remove.all.from.cart');
+Route::post('apply-coupon', [Controllers\CartController::class, 'applyCoupon'])->name('apply.coupon');
 
 // Checkout controllers
 Route::get('checkout',  [Controllers\CheckoutController::class, 'index'])->name('checkout');

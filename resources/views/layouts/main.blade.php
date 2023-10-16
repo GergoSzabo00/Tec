@@ -116,6 +116,9 @@
             var subtotal = 0;
             var shippingCost = 0;
             var totalPrice = 0;
+            var couponCode = "";
+            var couponDiscount = 0;
+            var couponDiscountStr = "";
 
             $(document).ready(function() 
             {
@@ -129,21 +132,32 @@
                     $('.subtotal').text(subtotal);
                     $('.shippingCost').text(shippingCost);
                     $('.totalPrice').text(totalPrice);
+                    $('.couponDiscount').text(couponDiscountStr);
                 }
 
-                function updateCheckoutAndRemoveBtnState()
+                function updateBtnStates()
                 {
                     if(cartItemCount > 0)
                     {
                         $('.checkoutBtn').removeClass('disabled');
                         $('.removeAllItemsFromCartBtn').removeClass('disabled');
+                        $('#applyCouponBtn').removeClass('disabled');
                     }
                     else
                     {
                         $('.checkoutBtn').addClass('disabled');
                         $('.removeAllItemsFromCartBtn').addClass('disabled');
+                        $('#applyCouponBtn').addClass('disabled');
                     }
                     
+                }
+
+                function updateDiscountVisibility() {
+                    if (couponDiscount > 0) {
+                        $('.couponDiscountHolder').removeClass('d-none');
+                    } else {
+                        $('.couponDiscountHolder').addClass('d-none');
+                    }
                 }
 
                 function generateItemsFromTemplate(template, emptyTemplate, itemHolder)
@@ -210,10 +224,14 @@
                             subtotal = "$"+parseFloat(data.subtotal).toLocaleString(undefined, { minimumFractionDigits: 2 });
                             shippingCost = "$"+parseFloat(data.shippingCost).toLocaleString(undefined, { minimumFractionDigits: 2 });
                             totalPrice = "$"+parseFloat(data.totalPrice).toLocaleString(undefined, { minimumFractionDigits: 2 });
+                            couponCode = data.couponCode;
+                            couponDiscount = data.couponDiscount;
+                            couponDiscountStr = "-$"+parseFloat(data.couponDiscount).toLocaleString(undefined, { minimumFractionDigits: 2 });
                             updateCartItemCount();
                             updatePrices();
                             updateItems();
-                            updateCheckoutAndRemoveBtnState();
+                            updateBtnStates();
+                            updateDiscountVisibility();
                         }
                     });
                 }
@@ -267,6 +285,9 @@
                             success: function(data)
                             {
                                 getCartInfo();
+                            },
+                            error: function(error) {
+                                console.log(error);
                             }
                         });
                     }
@@ -300,6 +321,44 @@
                     {
                         e.preventDefault();
                     }
+                });
+
+                
+                $('#applyCouponBtn').on('click', function(e) {
+                    let couponCodeInput = $('#coupon_code');
+                    
+                    if (!couponCodeInput) {
+                        return;
+                    }
+
+                    let couponCode = couponCodeInput.val();
+
+                    $.ajax({
+                        url: "{{route('apply.coupon')}}",
+                        type: 'POST',
+                        dataType: 'json',
+                        data: {'_token': '{{csrf_token()}}', 'code': couponCode},
+                        success: function(data)
+                        {
+                            switch(data.status) {
+                                case 200:
+                                    console.log(data.data);
+                                    getCartInfo();
+                                    break;
+                                case 422:
+                                    console.log(data.error);
+                                    break;
+                            }
+                        },
+                        error: function(xhr, textStatus, errorThrown) {
+                            switch(xhr.status) {
+                                case 404:
+                                    console.log("Coupon code invalid!");
+                                    break;
+                            }
+                        }
+                    });
+
                 });
 
 

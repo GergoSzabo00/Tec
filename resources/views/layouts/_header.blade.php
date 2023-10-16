@@ -51,6 +51,10 @@
                         <div>
                             <p>{{__('Subtotal')}}<span class="subtotal text-primary float-end"></span></p>
                             <p>{{__('Shipping cost')}}<span class="shippingCost text-primary float-end"></span></p>
+                            <div class="couponDiscountHolder d-none">
+                                <hr>
+                                <p>{{__('Coupon discount')}}<span class="couponDiscount text-danger float-end"></span></p>
+                            </div>
                             <hr>
                             <p class="fs-4">{{__('Total')}}<span class="totalPrice text-primary float-end"></span></p>
                         </div>
