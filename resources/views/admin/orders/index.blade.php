@@ -128,7 +128,7 @@
 
 @section('content')
 <div class="d-flex align-items-center">
-    <h2>{{__('Manufacturers')}}</h2>
+    <h2>{{__('Orders')}}</h2>
     <a class="btn btn-primary rounded-pill ms-auto" href="{{route('manufacturer.create')}}"><i class="fa fa-plus"></i> {{__('New manufacturer')}}</a>
 </div>
 <div class="table-responsive of-y-hidden p-1 mt-3">
