@@ -17,8 +17,5 @@ class PaymentOptionSeeder extends Seeder
     {
         PaymentOption::create(['name' => 'Credit card']);
         PaymentOption::create(['name' => 'Cash']);
-        PaymentOption::create(['name' => 'Apple Pay']);
-        PaymentOption::create(['name' => 'Google Pay']);
-        PaymentOption::create(['name' => 'PayPal']);
     }
 }
