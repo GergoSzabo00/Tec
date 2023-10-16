@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('code')->unique();
             $table->enum('type', ['numeric', 'percentage']);
-            $table->decimal('amount', 10, 2);
+            $table->decimal('value', 10, 2);
             $table->decimal('minimal_cart_amount', 10, 2);
             $table->date('expires_at');
             $table->timestamps();
