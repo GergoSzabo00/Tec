@@ -15,7 +15,7 @@
         <div class="col-lg-8">
             <div class="card">
                 <div class="card-body">
-                    <h5>{{__('Personal information')}}</h5>
+                    <h5>{{__('Personal info')}}</h5>
                     <form method="POST" action="{{route('update.personal.info')}}">
                         @csrf
                         <div class="row g-3">
