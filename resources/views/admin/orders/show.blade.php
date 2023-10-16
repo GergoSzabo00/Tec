@@ -16,8 +16,8 @@
                 <dl>
                     <dl><span class="fw-bold">{{__('Customer name')}}:</span> {{ $order->customer_name }}</dl>
                     <dl><span class="fw-bold">{{__('Shipping address')}}:</span> {{ $order->shipping_address }}</dl>
-                    <dl><span class="fw-bold">{{__('Order status')}}:</span> <span class="badge bg-secondary rounded-pill">{{ __($orderStatusName) }}</span></dl>
-                    <dl><span class="fw-bold">{{__('Payment method')}}:</span> <span class="badge bg-secondary rounded-pill">{{ __($paymentOptionName) }}</span></dl>
+                    <dl><span class="fw-bold">{{__('Order status')}}:</span> <span class="badge bg-secondary rounded-pill">{{ $orderStatusName }}</span></dl>
+                    <dl><span class="fw-bold">{{__('Payment method')}}:</span> <span class="badge bg-secondary rounded-pill">{{ $paymentOptionName }}</span></dl>
                 </dl>
                 <hr>
                 <h5>{{ __('Products') }}</h5>
