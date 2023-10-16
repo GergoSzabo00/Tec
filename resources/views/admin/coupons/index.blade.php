@@ -12,7 +12,7 @@
             ordering: true,
             stripeClasses: [],
             columnDefs: [{
-                targets: 2,
+                targets: [5, 6],
                 render: $.fn.dataTable.render.moment('','L LTS', '{{ str_replace('_', '-', app()->getLocale()) }}')
             }],
             columns: [
