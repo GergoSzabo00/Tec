@@ -28,6 +28,20 @@ class CheckoutController extends Controller
     {
         $customerInfo = null;
         $customerAddresses = null;
+
+        $cart = session()->get('cart', []);
+
+        if (!isset($cart['items'])) {
+            return redirect('cart');
+        }
+
+        $cartItems = $cart['items'];
+
+        if (empty($cartItems))
+        {
+            return redirect('cart');
+        }
+
         if (Auth::user())
         {
             $customerInfo = Auth::user()->customer_info;
@@ -46,11 +60,17 @@ class CheckoutController extends Controller
      */
     public function store(CheckoutRequest $request)
     {
-        $cartItems = session()->get('cart', []);
+        $cart = session()->get('cart', []);
+
+        if (!isset($cart['items'])) {
+            return redirect('cart');
+        }
+
+        $cartItems = $cart['items'];
 
         if (empty($cartItems))
         {
-            return redirect('checkout')->with('error', __('No items in cart!'));
+            return redirect('cart');
         }
 
         return DB::transaction(function () use ($request, $cartItems)
@@ -159,6 +179,7 @@ class CheckoutController extends Controller
 
             session()->forget('cart');
 
+            // TODO: return to a page where the invoice or some summary can be seen
             return redirect('checkout')->with('success', __('Order placed successfully!'));
         });
     }
