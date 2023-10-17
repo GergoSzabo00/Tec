@@ -175,7 +175,7 @@ class CheckoutController extends Controller
             }
 
 
-            Mail::to($email)->send(new OrderPlaced($order, $subtotal, $shippingCost));
+            Mail::to($email)->queue(new OrderPlaced($order, $subtotal, $shippingCost));
 
             session()->forget('cart');
 
