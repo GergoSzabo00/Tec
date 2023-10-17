@@ -38,6 +38,12 @@
                 <div class="couponDiscountHolder d-none">
                     <hr>
                     <p class="card-text">{{__('Coupon discount')}}<span class="couponDiscount text-danger float-end"></span></p>
+                    <div class="d-flex align-items-center">
+                        <span class="text-muted appliedCouponCode"></span>
+                        <button class="removeCouponBtn btn btn-danger ms-auto" type="button">
+                            {{ __('Remove') }}
+                        </button>
+                    </div>
                 </div>
                 <hr>
                 <p class="card-text fs-4">{{__('Total')}}<span class="totalPrice text-primary float-end"></span></p>

@@ -241,4 +241,26 @@ class CartController extends Controller
         return response()->json(['status'=>200, 'data'=>'success']);
     }
 
+    /**
+     * Removes coupon from the cart if there is a coupon applied
+     *
+     * @param \Illuminate\Http\Request
+     * @return \Illuminate\Http\Response
+     */
+    public function removeCoupon() 
+    {
+        $cart = session()->get('cart', []);
+
+        if(!isset($cart['coupon_code'])) {
+            return;
+        }
+
+        unset($cart['coupon_code']);
+
+        session()->put('cart', $cart);
+
+        return response()->json(['status'=>200, 'data'=>'Success']);
+
+    }
+
 }

@@ -34,6 +34,7 @@ Route::post('update-cart-quantity', [Controllers\CartController::class, 'updateC
 Route::post('remove-from-cart', [Controllers\CartController::class, 'removeFromCart'])->name('remove.from.cart');
 Route::post('remove-all-from-cart', [Controllers\CartController::class, 'removeAllFromCart'])->name('remove.all.from.cart');
 Route::post('apply-coupon', [Controllers\CartController::class, 'applyCoupon'])->name('apply.coupon');
+Route::post('remove-coupon', [Controllers\CartController::class, 'removeCoupon'])->name('remove.coupon');
 
 // Checkout controllers
 Route::get('checkout',  [Controllers\CheckoutController::class, 'index'])->name('checkout');

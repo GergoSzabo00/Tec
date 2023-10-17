@@ -160,6 +160,10 @@
                     }
                 }
 
+                function updateCouponCodeText() {
+                    $('.appliedCouponCode').text(couponCode);
+                }
+
                 function generateItemsFromTemplate(template, emptyTemplate, itemHolder)
                 {
                     $(itemHolder).html('');
@@ -232,6 +236,7 @@
                             updateItems();
                             updateBtnStates();
                             updateDiscountVisibility();
+                            updateCouponCodeText();
                         }
                     });
                 }
@@ -359,6 +364,23 @@
                         }
                     });
 
+                });
+
+                $(document).on('click', '.removeCouponBtn', function(e)
+                {
+                    if (couponDiscount <= 0) {
+                        return;
+                    }
+
+                    $.ajax({
+                        url: "{{route('remove.coupon')}}",
+                        type: 'POST',
+                        data: {'_token': '{{csrf_token()}}'},
+                        success: function(data)
+                        {
+                            getCartInfo();
+                        }
+                    });
                 });
 
 
