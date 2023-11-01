@@ -23,12 +23,14 @@
                     <span><i class="fa fa-fw fa-boxes"></i> {{__('In stock')}}:</h5>
                     <span>{{$product->quantity_in_stock}} {{__('piece')}}</span>
                 </div>
+                @if($product->quantity_in_stock > 0)
                 <div class="mt-3">
                     <button class="btn btn-primary rounded-pill addToCartBtn" data-bs-id="{{$product->id}}">
                         <i class="fa fa-fw fa-cart-shopping"></i>
                         {{__('Add to cart')}}
                     </button>
                 </div>
+                @endif
             </div>
         </div>
     </div>

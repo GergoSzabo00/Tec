@@ -75,12 +75,14 @@
                     </div>
                 </div>
             </a>
+            @if($product->quantity_in_stock > 0)
             <div class="d-grid p-3">
                 <button class="btn btn-primary rounded-pill addToCartBtn" data-bs-id="{{$product->id}}" type="button">
                     <i class="fa fa-fw fa-shopping-cart"></i>
                     {{__('Add to cart')}}
                 </button>
             </div>
+            @endif
         </div>
     </div>
     @empty
