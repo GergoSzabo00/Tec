@@ -99,7 +99,7 @@
                         </div>
                         <x-forms.input type="number" id="coupon_value" name="coupon_value" icon="dollar" label="{{ __('Value') }}" placeholder="{{ __('Value') }}" min=".01" max="99999999.99" step=".01" />
                         <x-forms.input type="number" id="minimum_cart_amount" name="minimum_cart_amount" icon="dollar" label="{{ __('Minimum cart amount') }}" placeholder="{{ __('Minimum cart amount') }}" value="0" min="0" max="99999999.99" step=".01" />
-                        <x-forms.input type="date" id="expires_at" name="expires_at" label="{{ __('Expires at') }}" placeholder="{{ __('Expires at') }}" />
+                        <x-forms.input type="date" id="expires_at" name="expires_at" label="{{ __('Expires at') }}" placeholder="{{ __('Expires at') }}" value="{{ now()->add(new DateInterval('P1D'))->toDateString() }}" />
                     </div>
                 </div>
             </div>
