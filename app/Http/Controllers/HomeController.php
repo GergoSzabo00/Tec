@@ -1,15 +1,42 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\Models\Category;
+use App\Models\Manufacturer;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $products = Product::paginate(10);
-        return view('home')->with(compact('products'));
+        $categories = Category::orderBy('category_name')->get();
+        $manufacturers = Manufacturer::orderBy('name')->get();
+        $productQuery = Product::query();
+
+        $categoryQueryParam = null;
+        $manufacturerQueryParam = null;
+
+        if ($request->query('category') != null) 
+        {
+            $categoryQueryParam = $request->query('category');
+            $productIds = Product::whereHas('categories', function ($query) use($request) {
+                $query->where('category_id', $request->query('category'));
+            })->pluck('id');
+            $productQuery->whereIn('id', $productIds);
+        }
+
+        if ($request->query('manufacturer') !== null) 
+        {
+            $manufacturerQueryParam = $request->query('manufacturer');
+            $productQuery->where('manufacturer_id', $request->query('manufacturer'));
+        }
+
+        $productQuery->get();
+        $products = $productQuery->paginate(10);
+
+        return view('home')->with(compact('products', 'categories', 'manufacturers', 'categoryQueryParam', 'manufacturerQueryParam'));
     }
 
     /**
