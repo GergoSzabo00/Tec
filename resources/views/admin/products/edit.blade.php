@@ -79,7 +79,7 @@
                         <div class="col-12">
                             <label class="ms-3" for="manufacturerSelect">{{__('Manufacturer')}}</label>
                             <div class="form-group">
-                                <select id="manufacturerSelect" name="manufacturer" class="selectpicker mb-3" data-width="100%" data-live-search="true" title="{{$manufacturers->isEmpty() ? __('No manufacturers') : __('Choose a manufacturer')}}" {{$manufacturers->isEmpty() ? 'disabled': ''}}>
+                                <select id="manufacturerSelect" name="manufacturer_id" class="selectpicker mb-3" data-width="100%" data-live-search="true" title="{{$manufacturers->isEmpty() ? __('No manufacturers') : __('Choose a manufacturer')}}" {{$manufacturers->isEmpty() ? 'disabled': ''}}>
                                     <option></option>
                                     @foreach ($manufacturers as $manufacturer)
                                         <option {{ $product->manufacturer_id == $manufacturer->id  ? 'selected' : '' }} value="{{$manufacturer->id}}">{{$manufacturer->name}}</option>
