@@ -84,7 +84,7 @@
                         </select>
                     </div>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-6">
                     <a href="{{ route('home') }}" class="btn btn-danger rounded-pill" type="submit">{{ __('Clear filters') }}</a>
                     <button class="btn btn-primary rounded-pill" type="submit">{{ __('Apply filters') }}</button>
                 </div>
