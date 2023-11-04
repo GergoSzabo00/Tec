@@ -99,7 +99,7 @@
                         <div class="col-md-4 col-lg-4">
                             <div class="card form-check">
                                 <label class="card-body">
-                                    <input class="form-check-input{{$errors->has('payment_option') ? ' is-invalid ' : ''}}" type="radio" name="payment_option" value="{{$paymentOption->id}}">
+                                    <input class="form-check-input{{$errors->has('payment_option') ? ' is-invalid ' : ''}}" type="radio" name="payment_option" value="{{$paymentOption->id}}" {{ $paymentOption->id == 1 ? 'data-bs-toggle=collapse data-bs-target=#creditCardCollapse:not(.show) aria-expanded=false' : '' }}>
                                     <span class="card-title">{{$paymentOption->name}}</span>
                                 </label>
                             </div>
@@ -110,6 +110,18 @@
                             {{$errors->first('payment_option')}}
                         </div>
                         @endif
+                    </div>
+                    <div class="collapse p-1 mt-4{{old('payment_option') == '1' ? ' show' : ''}}" id="creditCardCollapse">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row g-3">
+                                    <x-forms.input id="cardNumber" name="cardNumber" type="text" icon="credit-card" placeholder="{{ __('Card number') }}" />
+                                    <x-forms.input id="cardHolderName" name="cardHolderName" type="text" icon="user" placeholder="{{ __('Card holder name') }}" />
+                                    <x-forms.input id="cardExpiryDate" name="cardExpiryDate" type="text" class="col-lg-6" icon="calendar" placeholder="{{ __('MM/YY') }}" />
+                                    <x-forms.input id="cardCode" name="cardCode" type="text" class="col-lg-6" icon="lock" placeholder="{{ __('CVC/CVV code') }}" />
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -129,8 +141,9 @@
                     </div>
                     <hr>
                     <p class="card-text fs-4">{{__('Total')}}<span class="totalPrice text-primary float-end"></span></p>
+                    <x-forms.checkbox id="terms" name="terms" label="{{ __('Agree terms and conditions') }}" errorMessage="{{ __('You must agree the terms and conditions.') }}" value="1" />
                     <div class="d-grid">
-                        <button type="submit" class="btn btn-primary checkoutBtn">{{__('Checkout')}}</button>
+                        <button type="submit" class="btn btn-primary checkoutBtn mt-2">{{__('Checkout')}}</button>
                     </div>
                 </div>
             </div>
