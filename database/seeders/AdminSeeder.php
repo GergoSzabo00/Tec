@@ -18,7 +18,7 @@ class AdminSeeder extends Seeder
     public function run()
     {
         $user = User::create([
-            'email' => 'admin@techzone.com',
+            'email' => 'techzone.laravel@gmail.com',
             'password' => Hash::make('AdminAdmin1234'),
             'is_verified' => 1,
             'is_admin' => 1
