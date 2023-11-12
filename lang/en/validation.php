@@ -130,6 +130,7 @@ return [
     'uploaded' => 'The :attribute failed to upload.',
     'url' => 'The :attribute must be a valid URL.',
     'uuid' => 'The :attribute must be a valid UUID.',
+    'card_number' => 'You must provide a valid card number.',
 
     /*
     |--------------------------------------------------------------------------

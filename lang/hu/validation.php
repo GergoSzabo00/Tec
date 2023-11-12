@@ -129,6 +129,7 @@ return [
     'uploaded'             => 'A(z) :attribute feltöltése sikertelen.',
     'url'                  => 'A(z) :attribute érvénytelen link.',
     'uuid'                 => ':attribute érvényes UUID-val kell rendelkezzen.',
+    'card_number' => 'Érvényes kártyaszámot kell megadnia.',
 
     /*
     |--------------------------------------------------------------------------
