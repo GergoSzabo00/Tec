@@ -221,17 +221,22 @@ class CartController extends Controller
 
         if (!isset($cart['items']))
         {
-            return response()->json(['status'=>422, 'error'=>'Cannot apply coupon code while cart is empty!', 422]);
+            return response()->json(['status'=>422, 'error'=>__('Cannot apply coupon code while cart is empty!'), 422]);
         }
 
         if (empty($cart['items'])) {
-            return response()->json(['status'=>422, 'error'=>'Cannot apply coupon code while cart is empty!', 422]);
+            return response()->json(['status'=>422, 'error'=>__('Cannot apply coupon code while cart is empty!'), 422]);
         }
 
         $coupon = Coupon::where('code', $request->code)->first();
 
         if(!$coupon) {
-            return response()->json(['status'=>404, 'error'=>'Invalid coupon code!'], 404);
+            return response()->json(['status'=>404, 'error'=>__('Invalid coupon code!')], 404);
+        }
+
+        if($coupon->expires_at < date("Y-m-d")) 
+        {
+            return response()->json(['status'=>410, 'error'=>__('Coupon expired.'), 410]);
         }
 
         $cart['coupon_code'] = $coupon->code;
