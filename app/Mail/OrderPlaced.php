@@ -15,6 +15,7 @@ class OrderPlaced extends Mailable
     protected $order;
     protected $subtotal;
     protected $shippingCost;
+    protected $discount;
 
     /**
      * Create a new message instance.
@@ -22,11 +23,12 @@ class OrderPlaced extends Mailable
      * @param \App\Models\Order $order
      * @return void
      */
-    public function __construct(Order $order, $subtotal, $shippingCost)
+    public function __construct(Order $order, $subtotal, $shippingCost, $discount)
     {
         $this->order = $order;
         $this->subtotal = $subtotal;
         $this->shippingCost = $shippingCost;
+        $this->discount = $discount;
     }
 
     /**
@@ -40,7 +42,8 @@ class OrderPlaced extends Mailable
         ->with([
             'order' => $this->order,
             'subtotal' => $this->subtotal,
-            'shippingCost' => $this->shippingCost
+            'shippingCost' => $this->shippingCost,
+            'discount' => $this->discount
         ]);
     }
 }

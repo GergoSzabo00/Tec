@@ -8,7 +8,7 @@ use App\Models\Order;
 use App\Models\OrderDetail;
 use App\Models\OrderStatus;
 use App\Models\PaymentOption;
-use App\Models\Product;
+use App\Models\Coupon;
 use App\Models\StoreInfo;
 use App\Mail\OrderPlaced;
 use Illuminate\Support\Facades\DB;
@@ -53,6 +53,32 @@ class CheckoutController extends Controller
     }
 
     /**
+     * Gets the discount for the cart.
+     *
+     * @return int
+     */
+    private function getDiscount($cart, $total) {
+
+        if (!isset($cart['coupon_code']))
+        {
+            return 0;
+        }
+
+        $coupon = Coupon::where('code', $cart['coupon_code'])->first();
+
+        if (!$coupon) {
+            unset($cart['coupon_code']);
+            return 0;
+        }
+
+        if ($coupon->type == 'numeric') {
+            return $coupon->coupon_value;
+        } else {
+            return ($total * $coupon->coupon_value) / 100;
+        }
+    }
+
+    /**
      * Store a newly created resource in storage.
      *
      * @param  App\Http\Requests\CheckoutRequest  $request
@@ -73,9 +99,8 @@ class CheckoutController extends Controller
             return redirect('cart');
         }
 
-        return DB::transaction(function () use ($request, $cartItems)
+        return DB::transaction(function () use ($request, $cart, $cartItems)
         { 
-
             $customer_name = $request->firstname.' '.$request->lastname;
 
             $country = Country::find($request->country);
@@ -110,7 +135,6 @@ class CheckoutController extends Controller
                         $user->customer_addresses()->attach($address);
 
                     }
-                    
 
                     $shipping_address = $newAddressCountry->name.' '.$request->newAddressZip_code.' '.$request->newAddressState.' '.$request->newAddressCity.' '.$request->newAddressAddress;
                 }
@@ -133,17 +157,18 @@ class CheckoutController extends Controller
 
             $subtotal = 0;
 
-            foreach($cartItems as $key => $cartItem)
-            {
-                $product = Product::find($key);
+            $discount = 0;
 
-                if($product != null)
-                {
-                    $subtotal += $product->price * $cartItem['quantity'];
-                }
+            foreach($cartItems as $cartItem)
+            {
+                $subtotal += $cartItem['price'] * $cartItem['quantity'];
             }
 
             $totalPrice += $subtotal + $shippingCost;
+
+            $discount = $this->getDiscount($cart, $totalPrice);
+
+            $totalPrice -= $discount;
 
             $order = Order::create([
                 'user_id' => $user_id,
@@ -157,25 +182,19 @@ class CheckoutController extends Controller
 
             $order->save();
 
-            foreach($cartItems as $key => $cartItem)
+            foreach($cartItems as $cartItem)
             {
-                $product = Product::find($key);
-
-                if($product != null)
-                {
-                    $price = $product->price * $cartItem['quantity'];
-                    $quantity = $cartItem['quantity'];
-                    $orderDetail = OrderDetail::create([
-                        'order_id' => $order->id,
-                        'product_name' => $product->product_name,
-                        'bought_quantity' => $quantity,
-                        'price' => $price
-                    ]);
-                }
+                $price = $cartItem['price'] * $cartItem['quantity'];
+                $quantity = $cartItem['quantity'];
+                $orderDetail = OrderDetail::create([
+                    'order_id' => $order->id,
+                    'product_name' => $cartItem['product_name'],
+                    'bought_quantity' => $quantity,
+                    'price' => $price
+                ]);
             }
 
-
-            Mail::to($email)->queue(new OrderPlaced($order, $subtotal, $shippingCost));
+            Mail::to($email)->queue(new OrderPlaced($order, $subtotal, $shippingCost, $discount));
 
             session()->forget('cart');
 

@@ -136,6 +136,10 @@
 												<br>
 												{{__('Shipping cost')}}: <span style="color:#0d6efd;">${{number_format($shippingCost, 2, ',', ' ')}}</span>
 												<br>
+												@if ($discount > 0)
+												{{__('Coupon discount')}}: <span style="color:#eb4034;">-${{number_format($discount, 2, ',', ' ')}}</span>
+												<br>
+												@endif
 												{{__('Total')}}: <span style="color:#0d6efd;">${{number_format($order->total_price, 2, ',', ' ')}}</span>
 											</td>
 										</tr>
