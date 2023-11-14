@@ -109,6 +109,7 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.14.0-beta2/js/bootstrap-select.min.js" integrity="sha512-FHZVRMUW9FsXobt+ONiix6Z0tIkxvQfxtCSirkKc5Sb4TKHmqq1dZa8DphF0XqKb3ldLu/wgMa8mT6uXiLlRlw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.8/dist/sweetalert2.all.min.js" integrity="sha256-aHuHTU7SdMUuRBFzJX+PRkbfy9kd0uGHS8uc4M/NVBo=" crossorigin="anonymous"></script>
         <script>
 
             var cartItemCount = 0;
@@ -328,6 +329,51 @@
                     }
                 });
 
+                function showCouponError(errorMessage) {
+                    let couponCodeInput = $('#coupon_code');
+                    let couponCodeError = $('#couponCodeError');
+
+                    if (!couponCodeInput || !couponCodeError) {
+                        return
+                    }
+
+                    couponCodeInput.addClass('is-invalid');
+                    couponCodeError.addClass('d-block');
+                    couponCodeError.text(errorMessage); 
+                }
+
+                function clearCouponErrorsAndCode() {
+                    let couponCodeInput = $('#coupon_code');
+                    let couponCodeError = $('#couponCodeError');
+
+                    if (!couponCodeInput || !couponCodeError) {
+                        return
+                    }
+
+                    couponCodeInput.removeClass('is-invalid');
+                    couponCodeInput.val('');
+                    couponCodeError.removeClass('d-block');
+                    couponCodeError.text(''); 
+                }
+
+                function showSuccessToast(title) {
+                    const Toast = Swal.mixin({
+                        toast: true,
+                        position: "top-end",
+                        showConfirmButton: false,
+                        timer: 3000,
+                        timerProgressBar: true,
+                        didOpen: (toast) => {
+                            toast.onmouseenter = Swal.stopTimer;
+                            toast.onmouseleave = Swal.resumeTimer;
+                        }
+                    });
+
+                    Toast.fire({
+                        icon: "success",
+                        title: title
+                    });
+                }
                 
                 $('#applyCouponBtn').on('click', function(e) {
                     let couponCodeInput = $('#coupon_code');
@@ -338,6 +384,11 @@
 
                     let couponCode = couponCodeInput.val();
 
+                    if(couponCode.trim() == '')
+                    {
+                        return;
+                    }
+
                     $.ajax({
                         url: "{{route('apply.coupon')}}",
                         type: 'POST',
@@ -347,10 +398,16 @@
                         {
                             switch(data.status) {
                                 case 200:
-                                    console.log(data.data);
+                                    clearCouponErrorsAndCode();
+                                    showSuccessToast('{{__('Coupon code successfully applied.')}}');
                                     getCartInfo();
                                     break;
+                                case 410:
+                                    showCouponError(data.error);
+                                    console.log(data.error);
+                                    break;
                                 case 422:
+                                    showCouponError(data.error);
                                     console.log(data.error);
                                     break;
                             }
@@ -358,7 +415,8 @@
                         error: function(xhr, textStatus, errorThrown) {
                             switch(xhr.status) {
                                 case 404:
-                                    console.log("Coupon code invalid!");
+                                    let errJson = JSON.parse(xhr.responseText);
+                                    showCouponError(errJson.error);
                                     break;
                             }
                         }

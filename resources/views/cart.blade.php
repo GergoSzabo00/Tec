@@ -56,9 +56,12 @@
         <div class="card">
             <div class="card-body">
                 <div class="d-flex">
-                    <x-forms.input class="w-100" type="text" id="coupon_code" name="code" placeholder="{{__('Coupon code')}}" />
+                    <div>
+                        <input type="text" class="form-control form-control-lg rounded-pill" id="coupon_code" name="code" placeholder="Coupon code">
+                    </div>
                     <button id="applyCouponBtn" class="btn btn-primary rounded-pill ms-2">{{ __('Apply') }}</button>
                 </div>
+                <div id="couponCodeError" class="invalid-feedback ms-2"></div>
             </div>
         </div>
     </div>
