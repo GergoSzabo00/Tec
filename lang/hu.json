@@ -98,7 +98,7 @@
     "Payment method": "Fizetési mód",
     "Cash": "Készpénz",
     "Credit card": "Bankkártya",
-    "Order placed successfully!": "Sikeres megrendelés!",
+    "Order placed successfully! We will send an email about your order details.": "Sikeres megrendelés! Egy emailt fogunk küldeni a megrendelésed részleteivel kapcsolatban.",
     "Thank you for your purchase!": "Köszönjük a vásárlásod!",
     "We are getting your order ready to be shipped.": "Előkészítjük a rendelésed a feladáshoz.",
     "You can see your order summary below.": "Alább láthatod a rendelésed összegzését.",
@@ -269,5 +269,6 @@
     "Privacy Policy": "Adatvédelmi Nyilatkozat",
     "Add coupon": "Kupon hozzáadása",
     "Generate code": "Kód generálása",
-    "Coupon added successfully!": "Kupon sikeresen hozzáadva!"
+    "Coupon added successfully!": "Kupon sikeresen hozzáadva!",
+    "Order placed": "Megrendelés leadva"
 }

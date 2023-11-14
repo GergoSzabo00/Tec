@@ -198,8 +198,7 @@ class CheckoutController extends Controller
 
             session()->forget('cart');
 
-            // TODO: return to a page where the invoice or some summary can be seen
-            return redirect('checkout')->with('success', __('Order placed successfully!'));
+            return redirect('/')->with('order_placed', __('Order placed successfully! We will send an email about your order details.'));
         });
     }
 }

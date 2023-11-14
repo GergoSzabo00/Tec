@@ -1,6 +1,20 @@
 @extends('layouts.main')
 
 @push('scripts')
+
+@if(session()->has('order_placed'))
+    <script>
+        $(document).ready(function() {
+            Swal.fire({
+                title: '{{__('Order placed')}}',
+                text: '{{session()->get('order_placed')}}',
+                icon: 'success',
+                confirmButtonText: 'OK'
+            });
+    });
+    </script>
+@endif
+
 <script>
     $(document).ready(function() {
         $('#productSearchbar').keyup(function() {
