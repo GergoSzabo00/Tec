@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\CouponRequest;
+use App\Http\Requests\CouponUpdateRequest;
 use App\Models\Coupon;
 use Yajra\Datatables\Datatables;
 
@@ -102,7 +103,7 @@ class CouponController extends Controller
      * @param  \App\Models\Coupon  $coupon
      * @return \Illuminate\Http\Response
      */
-    public function update(CouponRequest $request, Coupon $coupon)
+    public function update(CouponUpdateRequest $request, Coupon $coupon)
     {
         $coupon->update($request->except('_token'));
 
