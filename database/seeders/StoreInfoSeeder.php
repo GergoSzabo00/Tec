@@ -17,7 +17,7 @@ class StoreInfoSeeder extends Seeder
     {
         StoreInfo::truncate();
         StoreInfo::create([
-            'address' => 'Fictional Street',
+            'address' => 'Eger, Eszterházy Károly Katolikus Egyetem C épület',
             'phone' => '06123456789',
             'shipping_cost' => 10.87
         ]);
