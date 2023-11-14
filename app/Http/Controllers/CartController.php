@@ -46,6 +46,40 @@ class CartController extends Controller
     }
 
     /**
+     * Calculates the value of the items in the cart.
+     * 
+     * @return int
+     */
+    private function calculateSubtotal($cartItems)
+    {
+        $subtotal = 0;
+
+        foreach($cartItems as $item)
+        {
+            $subtotal += $item['price'] * $item['quantity'];
+        }
+
+        return $subtotal;
+    }
+
+    /**
+     * Calculates the number of the items present in the cart.
+     * 
+     * @return int
+     */
+    private function calculateNumOfItems($cartItems)
+    {
+        $numberOfItems = 0;
+
+        foreach($cartItems as $item)
+        {
+            $numberOfItems += $item['quantity'];
+        }
+
+        return $numberOfItems;
+    }
+
+    /**
      * Gets number of items in cart, the items themselves from the cart
      * and the total price of the items in the cart.
      *
@@ -70,11 +104,9 @@ class CartController extends Controller
 
         $cartItems = $cart['items'];
 
-        foreach($cartItems as $item)
-        {
-            $cartItemCount += $item['quantity'];
-            $subtotal += $item['price'] * $item['quantity'];
-        }
+        $subtotal = $this->calculateSubtotal($cartItems);
+
+        $cartItemCount = $this->calculateNumOfItems($cartItems);
 
         if(!empty($cartItems))
         {
@@ -87,7 +119,6 @@ class CartController extends Controller
         if(isset($cart['coupon_code'])) {
             $couponCode = $cart['coupon_code'];
         }
-
         
         $couponDiscount = $this->getDiscount($cart, $totalPrice);
 
@@ -237,6 +268,18 @@ class CartController extends Controller
         if($coupon->expires_at < date("Y-m-d")) 
         {
             return response()->json(['status'=>410, 'error'=>__('Coupon expired.'), 410]);
+        }
+
+        $shippingCost = StoreInfo::first()->shipping_cost;
+        $cartValue = $this->calculateSubtotal($cart['items']);
+        $totalCartValue = $cartValue + $shippingCost;
+
+        if($totalCartValue < $coupon->minimum_cart_amount)
+        {
+            $amountNeeded = $coupon->minimum_cart_amount - $totalCartValue;
+            return response()->json(['status'=>422,
+                'error'=>__('In order to use this coupon, you have to buy more items.') . ' ' . __('You have are missing: ') . '$' . number_format($amountNeeded, 2, ',', ' '),
+                422]);
         }
 
         $cart['coupon_code'] = $coupon->code;
