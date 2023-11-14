@@ -183,7 +183,11 @@ return [
         'minimum_cart_amount' => 'minimális kosár érték',
         'coupon_value' => 'kuponérték',
         'shipping_cost' => 'szállítási díj',
-        'payment_option' => 'fizetési mód'
+        'payment_option' => 'fizetési mód',
+        'card_number' => 'kártyaszám',
+        'card_holder_name' => 'kártyabirtokos név',
+        'card_expiry_date' => 'kártya lejárati idő',
+        'card_security_code' => 'kártya biztonsági kód'
     ],
 
 ];

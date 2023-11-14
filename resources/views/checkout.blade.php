@@ -38,26 +38,26 @@
                         <div class="col-lg-12">
                             <div class="card h-100 form-check">
                                 <label class="card-body">
-                                    <input class="form-check-input{{$errors->has('address') ? ' is-invalid' : ''}}" {{old('address') == 'newAddress' ? 'checked' : ''}} data-bs-toggle="collapse" data-bs-target="#newAddressCollapse:not(.show)" aria-expanded="false" aria-controls="newAddressCollapse" type="radio" name="address" value="newAddress">
+                                    <input class="form-check-input{{$errors->has('address') ? ' is-invalid' : ''}}" {{old('address') == 'Newaddress' ? 'checked' : ''}} data-bs-toggle="collapse" data-bs-target="#newAddressCollapse:not(.show)" aria-expanded="false" aria-controls="newAddressCollapse" type="radio" name="address" value="Newaddress">
                                     <span>{{__('Set new address')}}</span>
-                                    <div class="collapse p-1 mt-4{{old('address') == 'newAddress' ? ' show' : ''}}" id="newAddressCollapse">
+                                    <div class="collapse p-1 mt-4{{old('address') == 'Newaddress' ? ' show' : ''}}" id="newAddressCollapse">
                                         <div class="row">
-                                            <select id="country" name="newAddressCountry" class="{{$errors->has('newAddressCountry') ? 'is-invalid ' : ''}}selectpicker" title="{{ __('Country') }}" data-live-search="true" data-size="5" data-virtual-scroll="true">
+                                            <select id="country" name="country" class="{{$errors->has('country') ? 'is-invalid ' : ''}}selectpicker" title="{{ __('Country') }}" data-live-search="true" data-size="5" data-virtual-scroll="true">
                                                 @foreach ($countries as $country)
-                                                    <option {{ old('newAddressCountry') == $country->id ? 'selected' : '' }} data-content="<span class='fi fi-{{ strtolower($country->code) }}'></span> {{$country->name}}" value="{{$country->id}}"></option>
+                                                    <option {{ old('country') == $country->id ? 'selected' : '' }} data-content="<span class='fi fi-{{ strtolower($country->code) }}'></span> {{$country->name}}" value="{{$country->id}}"></option>
                                                 @endforeach
                                             </select>
-                                            @if ($errors->has('newAddressCountry'))
+                                            @if ($errors->has('country'))
                                             <div class="text-start invalid-feedback">
-                                                {{ $errors->first('newAddressCountry') }}
+                                                {{ $errors->first('country') }}
                                             </div>
                                             @endif
                                         </div>
                                         <div class="row g-3 mt-1">
-                                            <x-forms.input id="newAddressCity" name="newAddressCity" type="text" class="col-lg-4" icon="building" label="{{__('City')}}" placeholder="{{ __('City') }}" />
-                                            <x-forms.input id="newAddressState" name="newAddressState" type="text" class="col-lg-4" icon="building" label="{{__('State')}}" placeholder="{{ __('State') }}" />
-                                            <x-forms.input id="newAddressZip_code" name="newAddressZip_code" type="text" class="col-lg-4" icon="at" label="{{_('Zip code')}}" placeholder="{{ __('Zip code') }}" />
-                                            <x-forms.input id="newAddressAddress" name="newAddressAddress" type="text" icon="location-dot" label="{{__('Address')}}" placeholder="{{ __('Address') }}" />
+                                            <x-forms.input id="newAddressCity" name="city" type="text" class="col-lg-4" icon="building" label="{{__('City')}}" placeholder="{{ __('City') }}" />
+                                            <x-forms.input id="newAddressState" name="state" type="text" class="col-lg-4" icon="building" label="{{__('State')}}" placeholder="{{ __('State') }}" />
+                                            <x-forms.input id="newAddressZip_code" name="zip_code" type="text" class="col-lg-4" icon="at" label="{{_('Zip code')}}" placeholder="{{ __('Zip code') }}" />
+                                            <x-forms.input id="newAddressAddress" name="new_address" type="text" icon="location-dot" label="{{__('Address')}}" placeholder="{{ __('Address') }}" />
                                             <div class="ms-2">
                                                 <input type="hidden" name="save_address" value="0">
                                                 <x-forms.checkbox id="save_address" name="save_address" value="1" label="{{__('Save address')}}" errorMessage="{{$errors->has('save_address') ? $errors->first('save_address') : ''}}" />
@@ -99,7 +99,7 @@
                         <div class="col-md-4 col-lg-4">
                             <div class="card form-check">
                                 <label class="card-body">
-                                    <input class="form-check-input{{$errors->has('payment_option') ? ' is-invalid ' : ''}}" type="radio" name="payment_option" value="{{$paymentOption->id}}" {{ $paymentOption->id == 1 ? 'data-bs-toggle=collapse data-bs-target=#creditCardCollapse:not(.show) aria-expanded=false' : '' }}>
+                                    <input class="form-check-input{{$errors->has('payment_option') ? ' is-invalid ' : ''}}" {{old('payment_option') == $paymentOption->id ? 'checked' : ''}} type="radio" name="payment_option" value="{{$paymentOption->id}}" {{ $paymentOption->id == 1 ? 'data-bs-toggle=collapse data-bs-target=#creditCardCollapse:not(.show) aria-expanded=false' : '' }}>
                                     <span class="card-title">{{$paymentOption->name}}</span>
                                 </label>
                             </div>
@@ -115,10 +115,10 @@
                         <div class="card">
                             <div class="card-body">
                                 <div class="row g-3">
-                                    <x-forms.input id="cardNumber" name="cardNumber" type="text" icon="credit-card" placeholder="{{ __('Card number') }}" />
-                                    <x-forms.input id="cardHolderName" name="cardHolderName" type="text" icon="user" placeholder="{{ __('Card holder name') }}" />
-                                    <x-forms.input id="cardExpiryDate" name="cardExpiryDate" type="text" class="col-lg-6" icon="calendar" placeholder="{{ __('MM/YY') }}" />
-                                    <x-forms.input id="cardCode" name="cardCode" type="text" class="col-lg-6" icon="lock" placeholder="{{ __('CVC/CVV code') }}" />
+                                    <x-forms.input id="cardNumber" name="card_number" type="text" icon="credit-card" minlength="16" maxlength="16" placeholder="{{ __('Card number') }}" />
+                                    <x-forms.input id="cardHolderName" name="card_holder_name" type="text" icon="user" placeholder="{{ __('Card holder name') }}" />
+                                    <x-forms.input id="cardExpiryDate" name="card_expiry_date" type="text" class="col-lg-6" icon="calendar" placeholder="{{ __('MM/YY') }}" />
+                                    <x-forms.input id="cardSecurityCode" name="card_security_code" type="text" class="col-lg-6" icon="lock" minlength="3" maxlength="3" placeholder="{{ __('CVC/CVV code') }}" />
                                 </div>
                             </div>
                         </div>

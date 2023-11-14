@@ -118,25 +118,25 @@ class CheckoutController extends Controller
                 $user = Auth::user();
                 $user_id = $user->id;
 
-                if($request->address == "newAddress")
+                if($request->address == "Newaddress")
                 {
-                    $newAddressCountry = Country::find($request->newAddressCountry);
+                    $country = Country::find($request->country);
 
                     if($request->save_address == 1)
                     {
                         $address = Address::create([
-                            'country' => $newAddressCountry->name,
-                            'state' => $request->newAddressState,
-                            'zip_code'=> $request->newAddressZip_code,
-                            'city' => $request->newAddressCity,
-                            'address' => $request->newAddressAddress
+                            'country' => $country->name,
+                            'state' => $request->state,
+                            'zip_code'=> $request->zip_code,
+                            'city' => $request->city,
+                            'address' => $request->new_address
                         ]);
 
                         $user->customer_addresses()->attach($address);
 
                     }
 
-                    $shipping_address = $newAddressCountry->name.' '.$request->newAddressZip_code.' '.$request->newAddressState.' '.$request->newAddressCity.' '.$request->newAddressAddress;
+                    $shipping_address = $country->name.' '.$request->zip_code.' '.$request->state.' '.$request->city.' '.$request->new_address;
                 }
                 else
                 {
