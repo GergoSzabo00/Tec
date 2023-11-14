@@ -14,7 +14,7 @@ return [
     'setting_functional' => 'Functional cookies',
     'setting_functional_text' => 'are necessary for specific functionality on the website. Without them, some features may be disabled.',
     'setting_marketing' => 'Marketing cookies',
-    'setting_marketing_text' => 'allow us to personalise your experience and to send you relevant content and offers, on this website and other websites.',
+    'setting_marketing_text' => 'allow us to personalise your experience and to send you relevant content and offers, on this website.',
     'settings_accept_all' => 'Accept all cookies',
     'settings_cancel' => 'Cancel',
     'settings_close' => 'Close',
