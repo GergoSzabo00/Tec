@@ -278,7 +278,7 @@ class CartController extends Controller
         {
             $amountNeeded = $coupon->minimum_cart_amount - $totalCartValue;
             return response()->json(['status'=>422,
-                'error'=>__('In order to use this coupon, you have to buy more items.') . ' ' . __('You have are missing: ') . '$' . number_format($amountNeeded, 2, ',', ' '),
+                'error'=>__('In order to use this coupon, you have to buy more items.') . ' ' . __('You are missing: ') . '$' . number_format($amountNeeded, 2, ',', ' '),
                 422]);
         }
 
