@@ -32,6 +32,9 @@
         <link rel="icon" type="image/png" sizes="512x512" href="{{ url('/images/favicons/android-chrome-512x512.png') }}">
         <link rel="manifest" href="{{ url('/images/favicons/site.webmanifest') }}">
 
+        <!-- COOKIE CONSENT -->
+        <link rel="stylesheet" type="text/css" href="{{asset("vendor/cookie-consent/css/cookie-consent.css")}}">
+
     </head>
     <body class="bg-light">
         <div class="d-flex">
