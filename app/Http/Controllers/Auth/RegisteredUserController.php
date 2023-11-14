@@ -48,7 +48,6 @@ class RegisteredUserController extends Controller
             'zip_code' => ['required', 'integer', 'min:0', 'digits_between:3,10'],
             'address' => ['required', 'string'],
             'phone' => ['required', 'max:15'],
-            'terms' => ['required'],
         ]);
 
         return DB::transaction(function () use ($request) 

@@ -141,7 +141,7 @@
                     </div>
                     <hr>
                     <p class="card-text fs-4">{{__('Total')}}<span class="totalPrice text-primary float-end"></span></p>
-                    {{__('By clicking the checkout button, I agree the')}} <a href="#" target="_blank">{{__('Privacy Statement')}}</a>
+                    {{__('By clicking the checkout button, I accept')}} <a href="{{ route('privacy.policy') }}" target="_blank">{{__('the privacy policy')}}</a>
                     <div class="d-grid">
                         <button type="submit" class="btn btn-primary checkoutBtn mt-2">{{__('Checkout')}}</button>
                     </div>

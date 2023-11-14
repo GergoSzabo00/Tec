@@ -254,8 +254,9 @@
     "In order to use this coupon, you have to buy more items.": "Annak érdekében, hogy használhasd ezt a kupont, több terméket kell venned.",
     "You are missing: ": "Hiányzik: ",
     "Cannot apply coupon code while cart is empty!": "Nem alkalmazhatod ezt a kupon kódot, amíg üres a kosarad.",
-    "By clicking the checkout button, I agree the": "A vásárlás gombra kattintva, elfogadom az",
-    "Privacy Statement": "Adatvédelmi nyilatkozatot",
+    "By clicking the checkout button, I accept": "A vásárlás gombra kattintva, elfogadom",
+    "By clicking the register button, I accept": "A regisztráció gombra kattinva, elfogadom",
+    "the privacy policy": "az adatvédelmi nyilatkozatot",
     "Card number": "Kártyaszám",
     "Card holder name": "Kártyabirtokos neve",
     "MM/YY": "HH/ÉÉ",
@@ -264,5 +265,6 @@
     "Value": "Érték",
     "Minimum cart amount": "Minimális kosár összeg",
     "Numeric": "Numerikus",
-    "Percentage": "Százalékos"
+    "Percentage": "Százalékos",
+    "Privacy Policy": "Adatvédelmi Nyilatkozat"
 }

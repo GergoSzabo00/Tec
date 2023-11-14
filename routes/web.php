@@ -40,6 +40,8 @@ Route::post('remove-coupon', [Controllers\CartController::class, 'removeCoupon']
 Route::get('checkout',  [Controllers\CheckoutController::class, 'index'])->name('checkout');
 Route::post('checkout',  [Controllers\CheckoutController::class, 'store']);
 
+Route::get('privacy-policy', [Controllers\PrivacyPolicyController::class, 'index'])->name('privacy.policy');
+
 Route::middleware('admin')->group(function () 
 {
     Route::get('admin', [Controllers\Admin\AdminController::class, 'index'])->name('admin');

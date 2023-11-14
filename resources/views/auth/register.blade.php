@@ -36,7 +36,7 @@
                         <x-forms.input id="phone" name="phone" type="text" class="col-lg-6" icon="phone" placeholder="{{ __('Phone') }}" />
                     </div>
                     <div class="my-3 text-start">
-                        <x-forms.checkbox id="terms" name="terms" label="{{ __('Agree terms and conditions') }}" errorMessage="{{ __('You must agree the terms and conditions.') }}" value="1" />
+                        {{__('By clicking the register button, I accept')}} <a href="{{ route('privacy.policy') }}" target="_blank">{{ __('the privacy policy') }}</a>
                     </div>
                     <div class="d-grid my-3">
                         <button type="submit" class="btn btn-primary btn-lg rounded-pill">{{ __('Register') }}</button>
