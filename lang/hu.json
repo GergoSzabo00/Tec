@@ -266,5 +266,8 @@
     "Minimum cart amount": "Minimális kosár összeg",
     "Numeric": "Numerikus",
     "Percentage": "Százalékos",
-    "Privacy Policy": "Adatvédelmi Nyilatkozat"
+    "Privacy Policy": "Adatvédelmi Nyilatkozat",
+    "Add coupon": "Kupon hozzáadása",
+    "Generate code": "Kód generálása",
+    "Coupon added successfully!": "Kupon sikeresen hozzáadva!"
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ManufacturerRequest;
+use App\Http\Requests\ManufacturerUpdateRequest;
 use App\Models\Manufacturer;
 use Illuminate\Http\Request;
 use Yajra\Datatables\Datatables;
@@ -101,7 +102,7 @@ class ManufacturerController extends Controller
      * @param  \App\Models\Manufacturer  $manufacturer
      * @return \Illuminate\Http\Response
      */
-    public function update(ManufacturerRequest $request, Manufacturer $manufacturer)
+    public function update(ManufacturerUpdateRequest $request, Manufacturer $manufacturer)
     {
         $manufacturer->update($request->except('_token'));
 
