@@ -20,5 +20,5 @@ return [
     'settings_close' => 'Bezár',
     'settings_save' => 'Választásaim mentése',
     'settings_title' => 'Süti beállítások',
-    'settings_text' => 'Weboldalunk sütiket használ. Bármikor kiválaszthatod, hogy mely sütiket engedélyezed, és melyeket nem. Többet olvashatsz arról, hogy mik a sütik, és hogy milyen fajtákat tárolunk az  <a href=":policyUrl" target="_blank" class="underline hover:no-underline">Adatvédelmi Nyilatkozatunkban</a>.'
+    'settings_text' => 'Weboldalunk sütiket használ. Bármikor kiválaszthatod, hogy mely sütiket engedélyezed, és melyeket nem. Többet olvashatsz arról, hogy mik a sütik, és hogy milyen fajtákat tárolunk az  <a href=":policyUrl" target="_blank" class="underline hover:no-underline">Adatvédelmi nyilatkozatunkban</a>.'
 ];
