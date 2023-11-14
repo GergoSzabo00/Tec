@@ -187,7 +187,8 @@ return [
         'card_number' => 'kártyaszám',
         'card_holder_name' => 'kártyabirtokos név',
         'card_expiry_date' => 'kártya lejárati idő',
-        'card_security_code' => 'kártya biztonsági kód'
+        'card_security_code' => 'kártya biztonsági kód',
+        'new_address' => 'új cím'
     ],
 
 ];
