@@ -14,7 +14,7 @@ class CouponRequest extends FormRequest
     public function rules()
     {
         return [
-            'code' => 'required|alpha_num|min:3|max:255|unique:coupons,code,'.$this->coupon->id,
+            'code' => 'required|alpha_num|min:3|max:255|unique:coupons,code,'.$this->id,
             'type' => 'required|in:numeric,percentage',
             'coupon_value' => 'required|numeric|between:0.01,99999999.99',
             'minimum_cart_amount' => 'required|numeric|between:0,99999999.99',

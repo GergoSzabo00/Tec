@@ -159,6 +159,31 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+        'firstname' => 'keresztnév',
+        'lastname' => 'vezetéknév',
+        'password' => 'jelszó',
+        'password_confirmation' => 'jelszó megerősítése',
+        'country' => 'ország',
+        'city' => 'város',
+        'state' => 'megye',
+        'zip_code' => 'irányítószám',
+        'address' => 'cím',
+        'phone' => 'telefonszám',
+        'name' => 'név',
+        'category_name' => 'kategória név',
+        'product_name' => 'terméknév',
+        'price' => 'ár',
+        'description' => 'leírás',
+        'quantity_in_stock' => 'készlet',
+        'code' => 'kód',
+        'expires_at' => 'lejárat ideje',
+        'today' => 'ma',
+        'type' => 'típus',
+        'minimum_cart_amount' => 'minimális kosár érték',
+        'coupon_value' => 'kuponérték',
+        'shipping_cost' => 'szállítási díj',
+        'payment_option' => 'fizetési mód'
+    ],
 
 ];

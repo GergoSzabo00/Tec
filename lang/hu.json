@@ -243,5 +243,21 @@
     "Please click the button below to verify your email address.": "Kérlek kattints az alábbi gombra, hogy megerősítsd az email címedet!",
     "If you did not create an account, no further action is required.": "Ha nem te készítettél fiókot, nincs további teendőd.",
     "Verify email": "Email megerősítése",
-    "Resend Verification Email": "Megerősítő email újraküldése"
+    "Resend Verification Email": "Megerősítő email újraküldése",
+    "Coupon code": "Kuponkód",
+    "Apply": "Alkalmaz",
+    "Coupon discount": "Kuponkedvezmény",
+    "Remove": "Eltávolít",
+    "Coupon code successfully applied.": "Kuponkód sikeresen alkalmazva.",
+    "Invalid coupon code!": "Érvénytelen kuponkód!",
+    "Coupon expired.": "A kupon lejárt.",
+    "In order to use this coupon, you have to buy more items.": "Annak érdekében, hogy használhasd ezt a kupont, több terméket kell venned.",
+    "You are missing: ": "Hiányzik: ",
+    "Cannot apply coupon code while cart is empty!": "Nem alkalmazhatod ezt a kupon kódot, amíg üres a kosarad.",
+    "By clicking the checkout button, I agree the": "A vásárlás gombra kattintva, elfogadom az",
+    "Privacy Statement": "Adatvédelmi nyilatkozatot",
+    "Card number": "Kártyaszám",
+    "Card holder name": "Kártyabirtokos neve",
+    "MM/YY": "HH/ÉÉ",
+    "CVC/CVV code": "CVC/CVV kód"
 }

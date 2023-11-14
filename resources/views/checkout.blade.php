@@ -25,7 +25,7 @@
                         <div class="col-lg-4">   
                             <div class="card h-100 form-check">
                                 <label class="d-flex card-body">
-                                    <input class="form-check-input flex-shrink-0{{$errors->has('addresses') ? ' is-invalid' : ''}}" {{old('addresses') == $customerAddress->id ? 'checked' : ''}} data-bs-toggle="collapse" data-bs-target="#newAddressCollapse.show" aria-expanded="false" aria-controls="newAddressCollapse" type="radio" name="addresses" value="{{$customerAddress->id}}">
+                                    <input class="form-check-input flex-shrink-0{{$errors->has('address') ? ' is-invalid' : ''}}" {{old('address') == $customerAddress->id ? 'checked' : ''}} data-bs-toggle="collapse" data-bs-target="#newAddressCollapse.show" aria-expanded="false" aria-controls="newAddressCollapse" type="radio" name="address" value="{{$customerAddress->id}}">
                                     <span class="mx-2 text-break">{{$customerAddress->country.' '.$customerAddress->state.' '.$customerAddress->zip_code.' '.$customerAddress->city.' '.$customerAddress->address}}</span>
                                     <a class="ms-auto text-decoration-none text-nowrap" href="{{route('address.edit', $customerAddress)}}">
                                         <i class="fa fa-fw fa-pen-to-square"></i>
@@ -38,9 +38,9 @@
                         <div class="col-lg-12">
                             <div class="card h-100 form-check">
                                 <label class="card-body">
-                                    <input class="form-check-input{{$errors->has('addresses') ? ' is-invalid' : ''}}" {{old('addresses') == 'newAddress' ? 'checked' : ''}} data-bs-toggle="collapse" data-bs-target="#newAddressCollapse:not(.show)" aria-expanded="false" aria-controls="newAddressCollapse" type="radio" name="addresses" value="newAddress">
+                                    <input class="form-check-input{{$errors->has('address') ? ' is-invalid' : ''}}" {{old('address') == 'newAddress' ? 'checked' : ''}} data-bs-toggle="collapse" data-bs-target="#newAddressCollapse:not(.show)" aria-expanded="false" aria-controls="newAddressCollapse" type="radio" name="address" value="newAddress">
                                     <span>{{__('Set new address')}}</span>
-                                    <div class="collapse p-1 mt-4{{old('addresses') == 'newAddress' ? ' show' : ''}}" id="newAddressCollapse">
+                                    <div class="collapse p-1 mt-4{{old('address') == 'newAddress' ? ' show' : ''}}" id="newAddressCollapse">
                                         <div class="row">
                                             <select id="country" name="newAddressCountry" class="{{$errors->has('newAddressCountry') ? 'is-invalid ' : ''}}selectpicker" title="{{ __('Country') }}" data-live-search="true" data-size="5" data-virtual-scroll="true">
                                                 @foreach ($countries as $country)
@@ -67,9 +67,9 @@
                                 </label>
                             </div>
                         </div>
-                        @if ($errors->has('addresses'))
+                        @if ($errors->has('address'))
                             <div class="d-block invalid-feedback">
-                                {{$errors->first('addresses')}}
+                                {{$errors->first('address')}}
                             </div>
                         @endif
                     </div>
@@ -141,7 +141,7 @@
                     </div>
                     <hr>
                     <p class="card-text fs-4">{{__('Total')}}<span class="totalPrice text-primary float-end"></span></p>
-                    <x-forms.checkbox id="terms" name="terms" label="{{ __('Agree terms and conditions') }}" errorMessage="{{ __('You must agree the terms and conditions.') }}" value="1" />
+                    {{__('By clicking the checkout button, I agree the')}} <a href="#" target="_blank">{{__('Privacy Statement')}}</a>
                     <div class="d-grid">
                         <button type="submit" class="btn btn-primary checkoutBtn mt-2">{{__('Checkout')}}</button>
                     </div>

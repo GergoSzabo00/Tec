@@ -57,7 +57,7 @@
             <div class="card-body">
                 <div class="d-flex">
                     <div>
-                        <input type="text" class="form-control form-control-lg rounded-pill" id="coupon_code" name="code" placeholder="Coupon code">
+                        <input type="text" class="form-control form-control-lg rounded-pill" id="coupon_code" name="code" placeholder="{{__('Coupon code')}}">
                     </div>
                     <button id="applyCouponBtn" class="btn btn-primary rounded-pill ms-2">{{ __('Apply') }}</button>
                 </div>

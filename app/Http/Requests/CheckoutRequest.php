@@ -21,12 +21,12 @@ class CheckoutRequest extends FormRequest
                 'email' => 'required|string|email|max:255',
                 'phone' => 'required|min:4|max:15',
                 'payment_option' => 'required|exists:payment_options,id',
-                'addresses' => 'required|check_existence_or_other:addresses,id,newAddress',
-                'newAddressCountry' => 'required_if:addresses,newAddress|exclude_unless:addresses,newAddress|exists:countries,id',
-                'newAddressCity' => 'required_if:addresses,newAddress|exclude_unless:addresses,newAddress|alpha|min:2|max:255',
-                'newAddressState' => 'required_if:addresses,newAddress|exclude_unless:addresses,newAddress|alpha|min:2|max:255',
-                'newAddressZip_code' => 'required_if:addresses,newAddress|exclude_unless:addresses,newAddress|integer|min:0|digits_between:3,10',
-                'newAddressAddress' => 'required_if:addresses,newAddress|exclude_unless:addresses,newAddress|string|min:2|max:255',
+                'address' => 'required|check_existence_or_other:addresses,id,newAddress',
+                'newAddressCountry' => 'required_if:address,newAddress|exclude_unless:address,newAddress|exists:countries,id',
+                'newAddressCity' => 'required_if:address,newAddress|exclude_unless:address,newAddress|alpha|min:2|max:255',
+                'newAddressState' => 'required_if:address,newAddress|exclude_unless:address,newAddress|alpha|min:2|max:255',
+                'newAddressZip_code' => 'required_if:address,newAddress|exclude_unless:address,newAddress|integer|min:0|digits_between:3,10',
+                'newAddressAddress' => 'required_if:address,newAddress|exclude_unless:address,newAddress|string|min:2|max:255',
                 'save_address' => 'boolean'
             ];
         }

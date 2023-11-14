@@ -118,7 +118,7 @@ class CheckoutController extends Controller
                 $user = Auth::user();
                 $user_id = $user->id;
 
-                if($request->addresses == "newAddress")
+                if($request->address == "newAddress")
                 {
                     $newAddressCountry = Country::find($request->newAddressCountry);
 
@@ -140,7 +140,7 @@ class CheckoutController extends Controller
                 }
                 else
                 {
-                    $address = Address::find($request->addresses);
+                    $address = Address::find($request->address);
                     $shipping_address = $address->country.' '.$address->zip_code.' '.$address->state.' '.$address->city.' '.$address->address;
                 }
             }
