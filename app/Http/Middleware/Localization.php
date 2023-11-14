@@ -25,6 +25,19 @@ class Localization
             {
                 App::setLocale($localeCookie);
             }            
+        } 
+        else
+        {
+            if($request->hasHeader('Accept-Language'))
+            {
+                $localeHeader = $request->header('Accept-Language');
+                $locale = substr($localeHeader, 0, 2);
+
+                if(array_key_exists($locale, config('app.available_locales')))
+                {
+                    App::setLocale($locale);
+                }
+            }
         }
         return $next($request);
     }
