@@ -15,8 +15,8 @@ class AddressRequest extends FormRequest
     {   
         return [
             'country' => 'required|exists:countries,id',
-            'city' => 'required|alpha|min:2|max:255',
-            'state' => 'required|alpha|min:2|max:255',
+            'city' => 'required|string|min:2|max:255',
+            'state' => 'required|string|min:2|max:255',
             'zip_code' => 'required|integer|min:0|digits_between:3,10',
             'address' => 'required|string|min:2|max:255',
         ];

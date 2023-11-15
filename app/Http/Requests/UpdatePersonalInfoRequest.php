@@ -16,8 +16,8 @@ class UpdatePersonalInfoRequest extends FormRequest
     public function rules()
     {   
         return [
-            'firstname' => 'required|alpha|min:2|max:255',
-            'lastname' => 'required|alpha|min:2|max:255',
+            'firstname' => 'required|string|min:2|max:255',
+            'lastname' => 'required|string|min:2|max:255',
             'email' => 'required|string|email|max:255|unique:users,email,'.$this->user()->id,
             'phone' => 'required|min:4|max:15'
         ];
