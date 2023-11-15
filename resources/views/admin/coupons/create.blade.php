@@ -7,7 +7,7 @@
 
         const codeInput = $("#code");
         const valueInput = $('#coupon_value');
-        const valueInputIcon = $("#value-icon");
+        const valueInputIcon = $("#coupon_value-icon");
 
         function generateRandomCode(length) {
             
