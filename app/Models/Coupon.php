@@ -18,4 +18,9 @@ class Coupon extends Model
         'code', 'type', 'coupon_value', 'minimum_cart_amount', 'expires_at'
     ];
 
+    public function getTypeAttribute()
+    {
+        return __($this->attributes['type']);
+    }
+
 }

@@ -271,5 +271,7 @@
     "Generate code": "Kód generálása",
     "Coupon added successfully!": "Kupon sikeresen hozzáadva!",
     "Order placed": "Megrendelés leadva",
-    "You didn't order yet.": "Még nem rendeltél."
+    "You didn't order yet.": "Még nem rendeltél.",
+    "percentage": "százalékos",
+    "numeric": "numerikus"
 }
