@@ -270,5 +270,6 @@
     "Add coupon": "Kupon hozzáadása",
     "Generate code": "Kód generálása",
     "Coupon added successfully!": "Kupon sikeresen hozzáadva!",
-    "Order placed": "Megrendelés leadva"
+    "Order placed": "Megrendelés leadva",
+    "You didn't order yet.": "Még nem rendeltél."
 }
