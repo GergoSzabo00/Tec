@@ -45,10 +45,10 @@ class CheckoutRequest extends FormRequest
             'zip_code' => 'required|integer|min:0|digits_between:3,10',
             'address' => 'required|string|min:2|max:255',
             'payment_option' => 'required|exists:payment_options,id',
-            'card_number' => 'bail|required_if:payment_option,1|numeric|card_number',
-            'card_holder_name' => 'bail|required_if:payment_option,1|string',
-            'card_expiry_date' => 'bail|required_if:payment_option,1|regex:/^\d{2}\/\d{2}$/',
-            'card_security_code' => 'bail|required_if:payment_option,1|numeric|regex:/^\d{3}$/'
+            'card_number' => 'required_if:payment_option,1|exclude_unless:payment_option,1|numeric|card_number',
+            'card_holder_name' => 'required_if:payment_option,1|exclude_unless:payment_option,1|string',
+            'card_expiry_date' => 'required_if:payment_option,1|exclude_unless:payment_option,1|regex:/^\d{2}\/\d{2}$/',
+            'card_security_code' => 'required_if:payment_option,1|exclude_unless:payment_option,1|numeric|regex:/^\d{3}$/'
         ];
     }
 
