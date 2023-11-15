@@ -125,7 +125,7 @@
                 </div>
             </a>
             @if($product->quantity_in_stock > 0)
-            <div class="d-grid p-3">
+            <div class="d-grid mt-auto p-3">
                 <button class="btn btn-primary rounded-pill addToCartBtn" data-bs-id="{{$product->id}}" type="button">
                     <i class="fa fa-fw fa-shopping-cart"></i>
                     {{__('Add to cart')}}
@@ -134,7 +134,6 @@
             @endif
         </div>
     </div>
-    {{ $products->links() }}
     @empty
         <div class="card">
             <div class="card-body">
@@ -142,5 +141,6 @@
             </div>
         </div>
     @endforelse
+    {{ $products->links() }}
 </div>
 @endsection
