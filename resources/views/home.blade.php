@@ -111,7 +111,7 @@
     <div class="col-md-4 col-lg-3">
         <div class="card h-100 product-item">
             <a class="text-decoration-none text-reset" href="{{route('user.product.detail', $product->id)}}">
-                <img src="{{$product->product_image}}" class="card-img-top" alt="{{__('Product image of')}} {{$product->product_name}}">
+                <img src="{{$product->product_image}}" class="card-img-top img-fluid" alt="{{__('Product image of')}} {{$product->product_name}}">
                 <div class="card-body d-flex flex-column">
                     <h5 class="card-title">{{$product->product_name}}</h5>
                     <div class="mt-auto">

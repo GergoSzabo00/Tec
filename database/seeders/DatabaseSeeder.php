@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Manufacturer;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -18,7 +19,11 @@ class DatabaseSeeder extends Seeder
             CountrySeeder::class,
             OrderStatusSeeder::class,
             StoreInfoSeeder::class,
-            PaymentOptionSeeder::class
+            PaymentOptionSeeder::class,
+            CategorySeeder::class,
+            ManufacturerSeeder::class,
+            ProductSeeder::class,
+            AdminSeeder::class
         ]);
     }
 }
